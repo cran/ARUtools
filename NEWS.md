@@ -1,12 +1,38 @@
-# ARUtools 0.6.2
+# ARUtools 0.7.0
 
+## New
+
+  * `clean_metadata()` now can detect time zone offsets in filenames and return
+       a new column `tz_offset` (#27).
+       - `create_pattern_tz_offset()` creates the pattern to look for the offset.
+  * Look around patterns added to `create_pattern_XX` functions (#6)
+      - new function `create_lookaround()` helps create these patterns.
+  * Add internal environment for global variables and `get_pattern()`,
+      `add_pattern_aru_type()`, and `set_pattern()` were added as helper functions.
+  * ARU type detection is improved and now includes manufacturer and type. New function
+      `guess_ARU_type()` can be called on a path to guess the ARU type.
+
+## Update
+ 
+   * "job" package removed from `clip_wav()` ( #25 )
+   * Updates to `clean_logs()` (#28, #34)
+  
+## Bugs 
+
+ * Fix issue with no oversamples (GRTS fails from select_samples() if n is a data frame and all n_os are zero. #40)
+ * Fix to_lower() in check_names() causes error if upper cases used. #41
+ 
+ 
 # ARUtools 0.6.2
 
 * Initial CRAN submission.
 
-## New
+1st CRAN version! 🥳 
+Changes since 0.6.1 relate to getting package ready for CRAN submission and so included improved documentation, final coverage of tests, removing unnecessary functions. 
 
-Changes made to improve clarity for CRAN submission.
+- #36 tracks workflow to submission
+- Removed `play_random_track()` (dd3ddb195fe50c37cb83a15110651c4c659014dd) #38 
+- Added examples to final functions and remove \dontrun where necessary (44879bd3508af743049f0c5528d386d9f56a8475)
 
 # ARUtools 0.6.0
 

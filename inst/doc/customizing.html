@@ -49,7 +49,7 @@ overflow: visible;
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -365,11 +365,12 @@ have some problems.</p>
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; ✖ No times were successfully detected (2/2)</span></span>
 <span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; ✖ No ARU ids were successfully detected (2/2)</span></span>
 <span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; ✖ No sites were successfully detected (2/2)</span></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 8</span></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt;   file_name   type  path  aru_type aru_id site_id date_time date      </span></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;   &lt;dttm&gt;    &lt;date&gt;    </span></span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">#&gt; 1 2020_05_04… wav   site… SongMet… &lt;NA&gt;   &lt;NA&gt;    NA        2020-05-04</span></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">#&gt; 2 2020_05_04… wav   site… SongMet… &lt;NA&gt;   &lt;NA&gt;    NA        2020-05-04</span></span></code></pre></div>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 11</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">#&gt; 1 2020_05_04_0… wav   site… &lt;NA&gt;   Wildlife Ac… Song… SongMet… &lt;NA&gt;    &lt;NA&gt;     </span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">#&gt; 2 2020_05_04_0… wav   site… &lt;NA&gt;   Wildlife Ac… Song… SongMet… &lt;NA&gt;    &lt;NA&gt;     </span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="co">#&gt; # ℹ 2 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;</span></span></code></pre></div>
 <div id="regular-expressions" class="section level2">
 <h2>Regular expressions</h2>
 <p>First let’s talk a bit about how <code>clean_metadata()</code>
@@ -395,13 +396,14 @@ supply your own regular expression, instead.</p>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt; ✖ No times were successfully detected (2/2)</span></span>
 <span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; ✖ No ARU ids were successfully detected (2/2)</span></span>
 <span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>m</span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 8</span></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt;   file_name   type  path  aru_type aru_id site_id date_time date      </span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;   &lt;dttm&gt;    &lt;date&gt;    </span></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt; 1 2020_05_04… wav   site… SongMet… &lt;NA&gt;   site10… NA        2020-05-04</span></span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt; 2 2020_05_04… wav   site… SongMet… &lt;NA&gt;   site10… NA        2020-05-04</span></span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>m<span class="sc">$</span>site_id</span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt; [1] &quot;site100-a45&quot; &quot;site102-b56&quot;</span></span></code></pre></div>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 11</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt; 1 2020_05_04_0… wav   site… &lt;NA&gt;   Wildlife Ac… Song… SongMet… site10… &lt;NA&gt;     </span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt; 2 2020_05_04_0… wav   site… &lt;NA&gt;   Wildlife Ac… Song… SongMet… site10… &lt;NA&gt;     </span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt; # ℹ 2 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>m<span class="sc">$</span>site_id</span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt; [1] &quot;site100-a45&quot; &quot;site102-b56&quot;</span></span></code></pre></div>
 <p>However, with sites that follow a reasonable pattern of a prefix,
 followed by digits and optionally a suffix with digits, it might be
 easier to use a helper function to create the regular expression for
@@ -451,11 +453,12 @@ ids, dates and times.</p>
 <span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co">#&gt; Extracting ARU info...</span></span>
 <span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co">#&gt; Extracting Dates and Times...</span></span>
 <span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>m</span>
-<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 8</span></span>
-<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co">#&gt;   file_name   type  path  aru_type aru_id site_id date_time           date      </span></span>
-<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;   &lt;dttm&gt;              &lt;date&gt;    </span></span>
-<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="co">#&gt; 1 2020_05_04… wav   site… SongMet… s4a12… site10… 2020-05-04 05:25:00 2020-05-04</span></span>
-<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="co">#&gt; 2 2020_05_04… wav   site… SongMet… s4a11… site10… 2020-05-04 05:40:00 2020-05-04</span></span></code></pre></div>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 11</span></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="co">#&gt; 1 2020_05_04_0… wav   site… s4a12… Wildlife Ac… Song… SongMet… site10… &lt;NA&gt;     </span></span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="co">#&gt; 2 2020_05_04_0… wav   site… s4a11… Wildlife Ac… Song… SongMet… site10… &lt;NA&gt;     </span></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="co">#&gt; # ℹ 2 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;</span></span></code></pre></div>
 </div>
 <div id="other-options" class="section level2">
 <h2>Other options</h2>
@@ -476,11 +479,12 @@ pattern.</p>
 <span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>)</span>
 <span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co">#&gt; Extracting ARU info...</span></span>
 <span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="co">#&gt; Extracting Dates and Times...</span></span>
-<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 8</span></span>
-<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="co">#&gt;   file_name   type  path  aru_type aru_id site_id date_time           date      </span></span>
-<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;   &lt;dttm&gt;              &lt;date&gt;    </span></span>
-<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a><span class="co">#&gt; 1 05042020_0… wav   P01-… SongMet… S4A12… P01-1   2020-05-04 05:25:00 2020-05-04</span></span>
-<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a><span class="co">#&gt; 2 05042020_0… wav   P01-… SongMet… S4A11… P01-1   2020-05-04 05:40:00 2020-05-04</span></span></code></pre></div>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 11</span></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a><span class="co">#&gt; 1 05042020_052… wav   P01-… S4A12… Wildlife Ac… Song… SongMet… P01-1   &lt;NA&gt;     </span></span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a><span class="co">#&gt; 2 05042020_054… wav   P01-… S4A11… Wildlife Ac… Song… SongMet… P01-1   &lt;NA&gt;     </span></span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a><span class="co">#&gt; # ℹ 2 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;</span></span></code></pre></div>
 <p>Note that you need to specify it once when making the pattern, and
 then again when telling the function how to turn the extracted text into
 a date.</p>
@@ -518,40 +522,43 @@ then join the outputs</strong></p>
 <span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a><span class="co">#&gt; ✖ Not all sites were successfully detected (2/4)</span></span>
 <span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">filter</span>(m1, <span class="sc">!</span><span class="fu">is.na</span>(date_time)) <span class="co"># omit ones that didn&#39;t work</span></span>
 <span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a>m1</span>
-<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 8</span></span>
-<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a><span class="co">#&gt;   file_name   type  path  aru_type aru_id site_id date_time           date      </span></span>
-<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;   &lt;dttm&gt;              &lt;date&gt;    </span></span>
-<span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a><span class="co">#&gt; 1 05042020_0… wav   P01-… SongMet… S4A12… P01-1   2020-05-04 05:25:00 2020-05-04</span></span>
-<span id="cb12-20"><a href="#cb12-20" tabindex="-1"></a><span class="co">#&gt; 2 05042020_0… wav   P01-… SongMet… S4A11… P01-1   2020-05-04 05:40:00 2020-05-04</span></span>
-<span id="cb12-21"><a href="#cb12-21" tabindex="-1"></a></span>
-<span id="cb12-22"><a href="#cb12-22" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">clean_metadata</span>(</span>
-<span id="cb12-23"><a href="#cb12-23" tabindex="-1"></a>  <span class="at">project_files =</span> f,</span>
-<span id="cb12-24"><a href="#cb12-24" tabindex="-1"></a>  <span class="at">pattern_site_id =</span> <span class="fu">create_pattern_site_id</span>(<span class="at">prefix =</span> <span class="st">&quot;Site&quot;</span>, <span class="at">s_digits =</span> <span class="dv">0</span>),</span>
-<span id="cb12-25"><a href="#cb12-25" tabindex="-1"></a>  <span class="at">pattern_aru_id =</span> <span class="fu">create_pattern_aru_id</span>(<span class="at">n_digits =</span> <span class="dv">3</span>)</span>
-<span id="cb12-26"><a href="#cb12-26" tabindex="-1"></a>)</span>
-<span id="cb12-27"><a href="#cb12-27" tabindex="-1"></a><span class="co">#&gt; Extracting ARU info...</span></span>
-<span id="cb12-28"><a href="#cb12-28" tabindex="-1"></a><span class="co">#&gt; Extracting Dates and Times...</span></span>
-<span id="cb12-29"><a href="#cb12-29" tabindex="-1"></a><span class="co">#&gt; Identified possible problems with metadata extraction:</span></span>
-<span id="cb12-30"><a href="#cb12-30" tabindex="-1"></a><span class="co">#&gt; ✖ Not all dates were successfully detected (1/4)</span></span>
-<span id="cb12-31"><a href="#cb12-31" tabindex="-1"></a><span class="co">#&gt; ✖ Not all times were successfully detected (2/4)</span></span>
-<span id="cb12-32"><a href="#cb12-32" tabindex="-1"></a><span class="co">#&gt; ✖ Not all sites were successfully detected (2/4)</span></span>
-<span id="cb12-33"><a href="#cb12-33" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">filter</span>(m2, <span class="sc">!</span><span class="fu">is.na</span>(date_time)) <span class="co"># omit ones that didn&#39;t work</span></span>
-<span id="cb12-34"><a href="#cb12-34" tabindex="-1"></a>m2</span>
-<span id="cb12-35"><a href="#cb12-35" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 8</span></span>
-<span id="cb12-36"><a href="#cb12-36" tabindex="-1"></a><span class="co">#&gt;   file_name   type  path  aru_type aru_id site_id date_time           date      </span></span>
-<span id="cb12-37"><a href="#cb12-37" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;   &lt;dttm&gt;              &lt;date&gt;    </span></span>
-<span id="cb12-38"><a href="#cb12-38" tabindex="-1"></a><span class="co">#&gt; 1 2020-01-01… wav   Site… BarLT    BARLT… Site10  2020-01-01 09:00:00 2020-01-01</span></span>
-<span id="cb12-39"><a href="#cb12-39" tabindex="-1"></a><span class="co">#&gt; 2 2020-01-02… wav   Site… BarLT    BARLT… Site10  2020-01-02 09:00:00 2020-01-02</span></span>
-<span id="cb12-40"><a href="#cb12-40" tabindex="-1"></a></span>
-<span id="cb12-41"><a href="#cb12-41" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(m1, m2)</span>
-<span id="cb12-42"><a href="#cb12-42" tabindex="-1"></a>m</span>
-<span id="cb12-43"><a href="#cb12-43" tabindex="-1"></a><span class="co">#&gt; # A tibble: 4 × 8</span></span>
-<span id="cb12-44"><a href="#cb12-44" tabindex="-1"></a><span class="co">#&gt;   file_name   type  path  aru_type aru_id site_id date_time           date      </span></span>
-<span id="cb12-45"><a href="#cb12-45" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;   &lt;dttm&gt;              &lt;date&gt;    </span></span>
-<span id="cb12-46"><a href="#cb12-46" tabindex="-1"></a><span class="co">#&gt; 1 05042020_0… wav   P01-… SongMet… S4A12… P01-1   2020-05-04 05:25:00 2020-05-04</span></span>
-<span id="cb12-47"><a href="#cb12-47" tabindex="-1"></a><span class="co">#&gt; 2 05042020_0… wav   P01-… SongMet… S4A11… P01-1   2020-05-04 05:40:00 2020-05-04</span></span>
-<span id="cb12-48"><a href="#cb12-48" tabindex="-1"></a><span class="co">#&gt; 3 2020-01-01… wav   Site… BarLT    BARLT… Site10  2020-01-01 09:00:00 2020-01-01</span></span>
-<span id="cb12-49"><a href="#cb12-49" tabindex="-1"></a><span class="co">#&gt; 4 2020-01-02… wav   Site… BarLT    BARLT… Site10  2020-01-02 09:00:00 2020-01-02</span></span></code></pre></div>
+<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 11</span></span>
+<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
+<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
+<span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a><span class="co">#&gt; 1 05042020_052… wav   P01-… S4A12… Wildlife Ac… Song… SongMet… P01-1   &lt;NA&gt;     </span></span>
+<span id="cb12-20"><a href="#cb12-20" tabindex="-1"></a><span class="co">#&gt; 2 05042020_054… wav   P01-… S4A11… Wildlife Ac… Song… SongMet… P01-1   &lt;NA&gt;     </span></span>
+<span id="cb12-21"><a href="#cb12-21" tabindex="-1"></a><span class="co">#&gt; # ℹ 2 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;</span></span>
+<span id="cb12-22"><a href="#cb12-22" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">clean_metadata</span>(</span>
+<span id="cb12-24"><a href="#cb12-24" tabindex="-1"></a>  <span class="at">project_files =</span> f,</span>
+<span id="cb12-25"><a href="#cb12-25" tabindex="-1"></a>  <span class="at">pattern_site_id =</span> <span class="fu">create_pattern_site_id</span>(<span class="at">prefix =</span> <span class="st">&quot;Site&quot;</span>, <span class="at">s_digits =</span> <span class="dv">0</span>),</span>
+<span id="cb12-26"><a href="#cb12-26" tabindex="-1"></a>  <span class="at">pattern_aru_id =</span> <span class="fu">create_pattern_aru_id</span>(<span class="at">n_digits =</span> <span class="dv">3</span>)</span>
+<span id="cb12-27"><a href="#cb12-27" tabindex="-1"></a>)</span>
+<span id="cb12-28"><a href="#cb12-28" tabindex="-1"></a><span class="co">#&gt; Extracting ARU info...</span></span>
+<span id="cb12-29"><a href="#cb12-29" tabindex="-1"></a><span class="co">#&gt; Extracting Dates and Times...</span></span>
+<span id="cb12-30"><a href="#cb12-30" tabindex="-1"></a><span class="co">#&gt; Identified possible problems with metadata extraction:</span></span>
+<span id="cb12-31"><a href="#cb12-31" tabindex="-1"></a><span class="co">#&gt; ✖ Not all dates were successfully detected (1/4)</span></span>
+<span id="cb12-32"><a href="#cb12-32" tabindex="-1"></a><span class="co">#&gt; ✖ Not all times were successfully detected (2/4)</span></span>
+<span id="cb12-33"><a href="#cb12-33" tabindex="-1"></a><span class="co">#&gt; ✖ Not all sites were successfully detected (2/4)</span></span>
+<span id="cb12-34"><a href="#cb12-34" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">filter</span>(m2, <span class="sc">!</span><span class="fu">is.na</span>(date_time)) <span class="co"># omit ones that didn&#39;t work</span></span>
+<span id="cb12-35"><a href="#cb12-35" tabindex="-1"></a>m2</span>
+<span id="cb12-36"><a href="#cb12-36" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 11</span></span>
+<span id="cb12-37"><a href="#cb12-37" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
+<span id="cb12-38"><a href="#cb12-38" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
+<span id="cb12-39"><a href="#cb12-39" tabindex="-1"></a><span class="co">#&gt; 1 2020-01-01T0… wav   Site… BARLT… Frontier La… BAR-… BARLT    Site10  &lt;NA&gt;     </span></span>
+<span id="cb12-40"><a href="#cb12-40" tabindex="-1"></a><span class="co">#&gt; 2 2020-01-02T0… wav   Site… BARLT… Frontier La… BAR-… BARLT    Site10  &lt;NA&gt;     </span></span>
+<span id="cb12-41"><a href="#cb12-41" tabindex="-1"></a><span class="co">#&gt; # ℹ 2 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;</span></span>
+<span id="cb12-42"><a href="#cb12-42" tabindex="-1"></a></span>
+<span id="cb12-43"><a href="#cb12-43" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(m1, m2)</span>
+<span id="cb12-44"><a href="#cb12-44" tabindex="-1"></a>m</span>
+<span id="cb12-45"><a href="#cb12-45" tabindex="-1"></a><span class="co">#&gt; # A tibble: 4 × 11</span></span>
+<span id="cb12-46"><a href="#cb12-46" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
+<span id="cb12-47"><a href="#cb12-47" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
+<span id="cb12-48"><a href="#cb12-48" tabindex="-1"></a><span class="co">#&gt; 1 05042020_052… wav   P01-… S4A12… Wildlife Ac… Song… SongMet… P01-1   &lt;NA&gt;     </span></span>
+<span id="cb12-49"><a href="#cb12-49" tabindex="-1"></a><span class="co">#&gt; 2 05042020_054… wav   P01-… S4A11… Wildlife Ac… Song… SongMet… P01-1   &lt;NA&gt;     </span></span>
+<span id="cb12-50"><a href="#cb12-50" tabindex="-1"></a><span class="co">#&gt; 3 2020-01-01T0… wav   Site… BARLT… Frontier La… BAR-… BARLT    Site10  &lt;NA&gt;     </span></span>
+<span id="cb12-51"><a href="#cb12-51" tabindex="-1"></a><span class="co">#&gt; 4 2020-01-02T0… wav   Site… BARLT… Frontier La… BAR-… BARLT    Site10  &lt;NA&gt;     </span></span>
+<span id="cb12-52"><a href="#cb12-52" tabindex="-1"></a><span class="co">#&gt; # ℹ 2 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;</span></span></code></pre></div>
 <p>With this approach you should check that the number of files in the
 end matches the number you expect.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">nrow</span>(m)</span>
@@ -574,13 +581,14 @@ end matches the number you expect.</p>
 <span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a><span class="co">#&gt; Extracting ARU info...</span></span>
 <span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a><span class="co">#&gt; Extracting Dates and Times...</span></span>
 <span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a>m</span>
-<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a><span class="co">#&gt; # A tibble: 4 × 8</span></span>
-<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a><span class="co">#&gt;   file_name   type  path  aru_type aru_id site_id date_time           date      </span></span>
-<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;   &lt;dttm&gt;              &lt;date&gt;    </span></span>
-<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a><span class="co">#&gt; 1 05042020_0… wav   P01-… SongMet… S4A12… P01-1   2020-05-04 05:25:00 2020-05-04</span></span>
-<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a><span class="co">#&gt; 2 05042020_0… wav   P01-… SongMet… S4A11… P01-1   2020-05-04 05:40:00 2020-05-04</span></span>
-<span id="cb14-21"><a href="#cb14-21" tabindex="-1"></a><span class="co">#&gt; 3 2020-01-01… wav   Site… BarLT    BARLT… Site10  2020-01-01 09:00:00 2020-01-01</span></span>
-<span id="cb14-22"><a href="#cb14-22" tabindex="-1"></a><span class="co">#&gt; 4 2020-01-02… wav   Site… BarLT    BARLT… Site10  2020-01-02 09:00:00 2020-01-02</span></span></code></pre></div>
+<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a><span class="co">#&gt; # A tibble: 4 × 11</span></span>
+<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
+<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
+<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a><span class="co">#&gt; 1 05042020_052… wav   P01-… S4A12… Wildlife Ac… Song… SongMet… P01-1   &lt;NA&gt;     </span></span>
+<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a><span class="co">#&gt; 2 05042020_054… wav   P01-… S4A11… Wildlife Ac… Song… SongMet… P01-1   &lt;NA&gt;     </span></span>
+<span id="cb14-21"><a href="#cb14-21" tabindex="-1"></a><span class="co">#&gt; 3 2020-01-01T0… wav   Site… BARLT… Frontier La… BAR-… BARLT    Site10  &lt;NA&gt;     </span></span>
+<span id="cb14-22"><a href="#cb14-22" tabindex="-1"></a><span class="co">#&gt; 4 2020-01-02T0… wav   Site… BARLT… Frontier La… BAR-… BARLT    Site10  &lt;NA&gt;     </span></span>
+<span id="cb14-23"><a href="#cb14-23" tabindex="-1"></a><span class="co">#&gt; # ℹ 2 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;</span></span></code></pre></div>
 <p><strong>Which approach you should use depends on the
 situation.</strong></p>
 <p>The first approach means that the patterns being matched are more
@@ -599,7 +607,7 @@ make sure the ids and date/times make sense.</p>
 <span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;  &lt;int&gt;  &lt;int&gt; &lt;dttm&gt;             </span></span>
 <span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="co">#&gt; 1 P01-1   SongMeter S4A1111  wav         1      1      1 2020-05-04 05:40:00</span></span>
 <span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a><span class="co">#&gt; 2 P01-1   SongMeter S4A1234  wav         1      1      1 2020-05-04 05:25:00</span></span>
-<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a><span class="co">#&gt; 3 Site10  BarLT     BARLT100 wav         2      1      2 2020-01-01 09:00:00</span></span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a><span class="co">#&gt; 3 Site10  BARLT     BARLT100 wav         2      1      2 2020-01-01 09:00:00</span></span>
 <span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a><span class="co">#&gt; # ℹ 3 more variables: max_date &lt;dttm&gt;, min_time &lt;time&gt;, max_time &lt;time&gt;</span></span>
 <span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a><span class="fu">check_meta</span>(m, <span class="at">date =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a><span class="co">#&gt; # A tibble: 4 × 10</span></span>
@@ -607,13 +615,13 @@ make sure the ids and date/times make sense.</p>
 <span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt; &lt;date&gt;       &lt;int&gt;  &lt;int&gt;  &lt;int&gt; &lt;time&gt;  </span></span>
 <span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a><span class="co">#&gt; 1 P01-1   SongMeter S4A1111  wav   2020-05-04       1      1      1 05:40   </span></span>
 <span id="cb15-14"><a href="#cb15-14" tabindex="-1"></a><span class="co">#&gt; 2 P01-1   SongMeter S4A1234  wav   2020-05-04       1      1      1 05:25   </span></span>
-<span id="cb15-15"><a href="#cb15-15" tabindex="-1"></a><span class="co">#&gt; 3 Site10  BarLT     BARLT100 wav   2020-01-01       1      1      1 09:00   </span></span>
-<span id="cb15-16"><a href="#cb15-16" tabindex="-1"></a><span class="co">#&gt; 4 Site10  BarLT     BARLT100 wav   2020-01-02       1      1      1 09:00   </span></span>
+<span id="cb15-15"><a href="#cb15-15" tabindex="-1"></a><span class="co">#&gt; 3 Site10  BARLT     BARLT100 wav   2020-01-01       1      1      1 09:00   </span></span>
+<span id="cb15-16"><a href="#cb15-16" tabindex="-1"></a><span class="co">#&gt; 4 Site10  BARLT     BARLT100 wav   2020-01-02       1      1      1 09:00   </span></span>
 <span id="cb15-17"><a href="#cb15-17" tabindex="-1"></a><span class="co">#&gt; # ℹ 1 more variable: max_time &lt;time&gt;</span></span>
 <span id="cb15-18"><a href="#cb15-18" tabindex="-1"></a><span class="fu">check_problems</span>(m)</span>
-<span id="cb15-19"><a href="#cb15-19" tabindex="-1"></a><span class="co">#&gt; # A tibble: 0 × 5</span></span>
-<span id="cb15-20"><a href="#cb15-20" tabindex="-1"></a><span class="co">#&gt; # ℹ 5 variables: path &lt;chr&gt;, aru_id &lt;chr&gt;, site_id &lt;chr&gt;, date_time &lt;dttm&gt;,</span></span>
-<span id="cb15-21"><a href="#cb15-21" tabindex="-1"></a><span class="co">#&gt; #   date &lt;date&gt;</span></span>
+<span id="cb15-19"><a href="#cb15-19" tabindex="-1"></a><span class="co">#&gt; # A tibble: 0 × 6</span></span>
+<span id="cb15-20"><a href="#cb15-20" tabindex="-1"></a><span class="co">#&gt; # ℹ 6 variables: path &lt;chr&gt;, aru_id &lt;chr&gt;, site_id &lt;chr&gt;, tz_offset &lt;chr&gt;,</span></span>
+<span id="cb15-21"><a href="#cb15-21" tabindex="-1"></a><span class="co">#&gt; #   date_time &lt;dttm&gt;, date &lt;date&gt;</span></span>
 <span id="cb15-22"><a href="#cb15-22" tabindex="-1"></a></span>
 <span id="cb15-23"><a href="#cb15-23" tabindex="-1"></a><span class="fu">unique</span>(m<span class="sc">$</span>site_id)</span>
 <span id="cb15-24"><a href="#cb15-24" tabindex="-1"></a><span class="co">#&gt; [1] &quot;P01-1&quot;  &quot;Site10&quot;</span></span>
@@ -636,26 +644,28 @@ means ‘at the start’)</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="fu">clean_metadata</span>(<span class="at">project_files =</span> example_files, <span class="at">subset =</span> <span class="st">&quot;^a&quot;</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="co">#&gt; Extracting ARU info...</span></span>
 <span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="co">#&gt; Extracting Dates and Times...</span></span>
-<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="co">#&gt; # A tibble: 14 × 8</span></span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="co">#&gt;   file_name   type  path  aru_type aru_id site_id date_time           date      </span></span>
-<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;   &lt;dttm&gt;              &lt;date&gt;    </span></span>
-<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_2020… wav   a_BA… BarLT    BARLT… P01_1   2020-05-02 05:00:00 2020-05-02</span></span>
-<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_2020… wav   a_BA… BarLT    BARLT… P01_1   2020-05-03 05:20:00 2020-05-03</span></span>
-<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_2020… wav   a_S4… SongMet… S4A01… P02_1   2020-05-04 05:25:00 2020-05-04</span></span>
-<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_2020… wav   a_S4… SongMet… S4A01… P02_1   2020-05-05 07:30:00 2020-05-05</span></span>
-<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a><span class="co">#&gt; # ℹ 10 more rows</span></span></code></pre></div>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="co">#&gt; # A tibble: 14 × 11</span></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
+<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
+<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a><span class="co">#&gt; # ℹ 10 more rows</span></span>
+<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a><span class="co">#&gt; # ℹ 2 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;</span></span></code></pre></div>
 <p>To omit all files with the “a” prefix</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="fu">clean_metadata</span>(<span class="at">project_files =</span> example_files, <span class="at">subset =</span> <span class="st">&quot;^a&quot;</span>, <span class="at">subset_type =</span> <span class="st">&quot;omit&quot;</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a><span class="co">#&gt; Extracting ARU info...</span></span>
 <span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="co">#&gt; Extracting Dates and Times...</span></span>
-<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a><span class="co">#&gt; # A tibble: 28 × 8</span></span>
-<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a><span class="co">#&gt;   file_name   type  path  aru_type aru_id site_id date_time           date      </span></span>
-<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;   &lt;dttm&gt;              &lt;date&gt;    </span></span>
-<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_2020… wav   j_BA… BarLT    BARLT… P01_1   2020-05-02 05:00:00 2020-05-02</span></span>
-<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_2020… wav   j_BA… BarLT    BARLT… P01_1   2020-05-03 05:20:00 2020-05-03</span></span>
-<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_2020… wav   j_S4… SongMet… S4A01… P02_1   2020-05-04 05:25:00 2020-05-04</span></span>
-<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_2020… wav   j_S4… SongMet… S4A01… P02_1   2020-05-05 07:30:00 2020-05-05</span></span>
-<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a><span class="co">#&gt; # ℹ 24 more rows</span></span></code></pre></div>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a><span class="co">#&gt; # A tibble: 28 × 11</span></span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_202005… wav   j_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_202005… wav   j_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_202005… wav   j_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_202005… wav   j_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a><span class="co">#&gt; # ℹ 24 more rows</span></span>
+<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a><span class="co">#&gt; # ℹ 2 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;</span></span></code></pre></div>
 </div>
 <div id="matching-non-wave-files" class="section level3">
 <h3>Matching non-wave files</h3>
@@ -675,11 +685,79 @@ argument.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="fu">clean_metadata</span>(<span class="at">project_files =</span> f, <span class="at">file_type =</span> <span class="st">&quot;mp4&quot;</span>)</span>
 <span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="co">#&gt; Extracting ARU info...</span></span>
 <span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="co">#&gt; Extracting Dates and Times...</span></span>
-<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 8</span></span>
-<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="co">#&gt;   file_name   type  path  aru_type aru_id site_id date_time           date      </span></span>
-<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;   &lt;dttm&gt;              &lt;date&gt;    </span></span>
-<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_2020… mp4   a_BA… BarLT    BARLT… P01_1   2020-05-02 05:00:00 2020-05-02</span></span>
-<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_2020… mp4   a_BA… BarLT    BARLT… P01_1   2020-05-03 05:20:00 2020-05-03</span></span></code></pre></div>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 11</span></span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_202005… mp4   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   &lt;NA&gt;     </span></span>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_202005… mp4   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   &lt;NA&gt;     </span></span>
+<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a><span class="co">#&gt; # ℹ 2 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;</span></span></code></pre></div>
+</div>
+<div id="look-arounds" class="section level3">
+<h3>Look arounds</h3>
+<p>In some cases identifying what lies before or after a string of
+interest can help with extracting the pattern of interest. Details of
+look arounds can be found on the <a href="https://stringr.tidyverse.org/articles/regular-expressions.html#look-arounds">“stringr”</a>
+package website.</p>
+<p>The following code shows a set of files that contain repeated
+patterns that match both site and project folders. If we run
+<code>clean_metadata()</code> it fails to detect dates and times.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>  <span class="st">&quot;//BARLTs/DeploymentProjectXYZsites_202223/XYZBrantAirstrip/20230519_RemoteTrip2223/00015998_20230519T210900-0400_SS23.wav&quot;</span>,</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>  <span class="st">&quot;//BARLTs/DeploymentProjectXYZsites_202223/XYZPermafrostPFSC-SP1/20230415_RemoteTrip2223/00015321_20230415T214700-0400_Owls23.wav&quot;</span>,</span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>  <span class="st">&quot;//BARLTs/DeploymentProjectXYZsites_202223/XYZfoxden30/20230623_RemoteTrip2223/00015370_20230623T062000-0400_SR23.wav&quot;</span>,</span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>  <span class="st">&quot;//BARLTs/DeploymentProjectXYZsites_202223/XYZfoxden107/20220922_RemoteTrip2223/00016130_20220922T000200-0400_NFC22.wav&quot;</span>,</span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a>  <span class="st">&quot;//BARLTs/DeploymentProjectXYZsites_00202223/XYZfoxden107/20230711_RemoteTrip2223/00016130_20230711T093600-0400_SR23.wav&quot;</span></span>
+<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a>)</span>
+<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a></span>
+<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">clean_metadata</span>(</span>
+<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a>  <span class="at">project_files =</span> f,</span>
+<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a>  <span class="at">pattern_site_id =</span> <span class="fu">create_pattern_site_id</span>(<span class="at">prefix =</span> <span class="st">&quot;XYZ</span><span class="sc">\\</span><span class="st">w+&quot;</span>, <span class="at">p_digits =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">sep =</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;-&quot;</span>), <span class="at">s_digits =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>),</span>
+<span id="cb21-12"><a href="#cb21-12" tabindex="-1"></a>  <span class="at">pattern_aru_id =</span> <span class="fu">create_pattern_aru_id</span>(<span class="at">arus =</span> <span class="st">&quot;&quot;</span>, <span class="at">n_digits =</span> <span class="dv">8</span>), <span class="at">quiet =</span> T</span>
+<span id="cb21-13"><a href="#cb21-13" tabindex="-1"></a>)</span>
+<span id="cb21-14"><a href="#cb21-14" tabindex="-1"></a><span class="co">#&gt; Identified possible problems with metadata extraction:</span></span>
+<span id="cb21-15"><a href="#cb21-15" tabindex="-1"></a><span class="co">#&gt; ✖ No dates were successfully detected (5/5)</span></span>
+<span id="cb21-16"><a href="#cb21-16" tabindex="-1"></a><span class="co">#&gt; ✖ No times were successfully detected (5/5)</span></span></code></pre></div>
+<p>Even worse, it returns the wrong <code>site_id</code> values.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>m<span class="sc">$</span>site_id</span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a><span class="co">#&gt; [1] &quot;XYZsites_202223&quot;   &quot;XYZsites_202223&quot;   &quot;XYZsites_202223&quot;  </span></span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a><span class="co">#&gt; [4] &quot;XYZsites_202223&quot;   &quot;XYZsites_00202223&quot;</span></span></code></pre></div>
+<p>To tackle the <code>site_id</code> issue we can add a look behind to
+clue into the directory before the <code>site_id</code> always ends with
+“202223/”.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>m_site_id_fix <span class="ot">&lt;-</span> <span class="fu">clean_metadata</span>(</span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>  <span class="at">project_files =</span> f,</span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>  <span class="at">pattern_site_id =</span> <span class="fu">create_pattern_site_id</span>(</span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>    <span class="at">prefix =</span> <span class="st">&quot;XYZ</span><span class="sc">\\</span><span class="st">w+&quot;</span>, <span class="at">p_digits =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">sep =</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;-&quot;</span>), <span class="at">s_digits =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>,</span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>    <span class="at">look_behind =</span> <span class="st">&quot;202223/&quot;</span></span>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a>  ),</span>
+<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a>  <span class="at">pattern_aru_id =</span> <span class="fu">create_pattern_aru_id</span>(<span class="at">arus =</span> <span class="st">&quot;&quot;</span>, <span class="at">n_digits =</span> <span class="dv">8</span>), <span class="at">quiet =</span> T</span>
+<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a>)</span>
+<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a><span class="co">#&gt; Identified possible problems with metadata extraction:</span></span>
+<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a><span class="co">#&gt; ✖ No dates were successfully detected (5/5)</span></span>
+<span id="cb23-11"><a href="#cb23-11" tabindex="-1"></a><span class="co">#&gt; ✖ No times were successfully detected (5/5)</span></span>
+<span id="cb23-12"><a href="#cb23-12" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" tabindex="-1"></a>m_site_id_fix<span class="sc">$</span>site_id</span>
+<span id="cb23-14"><a href="#cb23-14" tabindex="-1"></a><span class="co">#&gt; [1] &quot;XYZBrantAirstrip&quot;  &quot;XYZPermafrostPFSC&quot; &quot;XYZfoxden30&quot;      </span></span>
+<span id="cb23-15"><a href="#cb23-15" tabindex="-1"></a><span class="co">#&gt; [4] &quot;XYZfoxden107&quot;      &quot;XYZfoxden107&quot;</span></span></code></pre></div>
+<p>This corrects the <code>site_id</code> values but the generic
+“pattern_aru_id” means that the <code>clean_metadata()</code> fails to
+detect dates and time as the “pattern_aru_id” is excluded when looking
+for dates and times.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>m_fix <span class="ot">&lt;-</span> <span class="fu">clean_metadata</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>  <span class="at">project_files =</span> f,</span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a>  <span class="at">pattern_site_id =</span> <span class="fu">create_pattern_site_id</span>(</span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>    <span class="at">prefix =</span> <span class="st">&quot;XYZ</span><span class="sc">\\</span><span class="st">w+&quot;</span>, <span class="at">p_digits =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">sep =</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;-&quot;</span>), <span class="at">s_digits =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a>    <span class="at">look_behind =</span> <span class="st">&quot;202223/&quot;</span></span>
+<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a>  ),</span>
+<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a>  <span class="at">pattern_aru_id =</span> <span class="fu">create_pattern_aru_id</span>(<span class="at">arus =</span> <span class="st">&quot;&quot;</span>, <span class="at">n_digits =</span> <span class="dv">8</span>, </span>
+<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a>                                         <span class="at">sep =</span> <span class="st">&quot;&quot;</span>, </span>
+<span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a>                                         <span class="at">look_behind =</span> <span class="st">&quot;RemoteTrip2223/&quot;</span>, </span>
+<span id="cb24-10"><a href="#cb24-10" tabindex="-1"></a>                                         <span class="at">look_ahead =</span> <span class="st">&quot;_&quot;</span>),</span>
+<span id="cb24-11"><a href="#cb24-11" tabindex="-1"></a>  <span class="at">quiet =</span> T</span>
+<span id="cb24-12"><a href="#cb24-12" tabindex="-1"></a>)</span></code></pre></div>
+<p>In the end the look arounds helped us pull out stubborn
+<code>site_id</code> vaules and separate overlapping patterns of
+<code>aru_id</code> and dates and times.</p>
 </div>
 </div>
 

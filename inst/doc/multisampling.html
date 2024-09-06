@@ -49,7 +49,7 @@ overflow: visible;
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -368,16 +368,17 @@ before 6am) or ‘late’ (occurring after 6am).</p>
 <span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt; Extracting Dates and Times...</span></span>
 <span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co">#&gt; Joining by columns `date_time_start` and `date_time_end`</span></span>
 <span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>m</span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="co">#&gt; # A tibble: 42 × 15</span></span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co">#&gt;   file_name   type  path  aru_type aru_id site_id date_time           date      </span></span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;   &lt;dttm&gt;              &lt;date&gt;    </span></span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_2020… wav   a_BA… BarLT    BARLT… P01_1   2020-05-02 05:00:00 2020-05-02</span></span>
-<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_2020… wav   a_BA… BarLT    BARLT… P01_1   2020-05-03 05:20:00 2020-05-03</span></span>
-<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_2020… wav   a_S4… SongMet… S4A01… P02_1   2020-05-04 05:25:00 2020-05-04</span></span>
-<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_2020… wav   a_S4… SongMet… S4A01… P02_1   2020-05-05 07:30:00 2020-05-05</span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="co">#&gt; # A tibble: 42 × 18</span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
 <span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a><span class="co">#&gt; # ℹ 38 more rows</span></span>
-<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a><span class="co">#&gt; # ℹ 7 more variables: longitude &lt;dbl&gt;, latitude &lt;dbl&gt;, tz &lt;chr&gt;, t2sr &lt;dbl&gt;,</span></span>
-<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a><span class="co">#&gt; #   t2ss &lt;dbl&gt;, time_period &lt;chr&gt;, year &lt;dbl&gt;</span></span></code></pre></div>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a><span class="co">#&gt; # ℹ 9 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;, longitude &lt;dbl&gt;,</span></span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a><span class="co">#&gt; #   latitude &lt;dbl&gt;, tz &lt;chr&gt;, t2sr &lt;dbl&gt;, t2ss &lt;dbl&gt;, time_period &lt;chr&gt;,</span></span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a><span class="co">#&gt; #   year &lt;dbl&gt;</span></span></code></pre></div>
 <p>Time to do some sampling!</p>
 <p>First we <strong>define the selection parameters</strong> for each
 time frame we’re interested in sampling. This might be “dawn” and
@@ -460,18 +461,19 @@ year, and time period.</p>
 <span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">&quot;data&quot;</span>, <span class="sc">-</span><span class="st">&quot;params&quot;</span>) <span class="sc">|&gt;</span></span>
 <span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">selection_group =</span> <span class="fu">glue</span>(<span class="st">&quot;{site_id}_{year}_{time_period}&quot;</span>))</span>
 <span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>w</span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="co">#&gt; # A tibble: 21 × 24</span></span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co">#&gt;   time_period  year file_name                type  path  aru_type aru_id site_id</span></span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;                    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;  </span></span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="co">#&gt; 1 early        2020 P01_1_20200503T052000_A… wav   a_BA… BarLT    BARLT… P01_1  </span></span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="co">#&gt; 2 early        2020 P02_1_20200504T052500_A… wav   a_S4… SongMet… S4A01… P02_1  </span></span>
-<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="co">#&gt; 3 early        2020 P06_1_20200509T052000_A… wav   a_BA… BarLT    BARLT… P06_1  </span></span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co">#&gt; 4 early        2020 P07_1_20200509T052500_A… wav   a_S4… SongMet… S4A01… P07_1  </span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="co">#&gt; # A tibble: 21 × 27</span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co">#&gt;   time_period  year file_name     type  path  aru_id manufacturer model aru_type</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;   </span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="co">#&gt; 1 early        2020 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT   </span></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="co">#&gt; 2 early        2020 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet…</span></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="co">#&gt; 3 early        2020 P06_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT   </span></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co">#&gt; 4 early        2020 P07_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet…</span></span>
 <span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a><span class="co">#&gt; # ℹ 17 more rows</span></span>
-<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a><span class="co">#&gt; # ℹ 16 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;, longitude &lt;dbl&gt;,</span></span>
-<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a><span class="co">#&gt; #   latitude &lt;dbl&gt;, tz &lt;chr&gt;, t2sr &lt;dbl&gt;, t2ss &lt;dbl&gt;, doy &lt;dbl&gt;, psel_by &lt;chr&gt;,</span></span>
-<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a><span class="co">#&gt; #   psel_min &lt;dbl&gt;, psel_doy &lt;dbl&gt;, psel &lt;dbl&gt;, psel_scaled &lt;dbl&gt;,</span></span>
-<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a><span class="co">#&gt; #   psel_std &lt;dbl&gt;, psel_normalized &lt;dbl&gt;, selection_group &lt;glue&gt;</span></span></code></pre></div>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a><span class="co">#&gt; # ℹ 18 more variables: site_id &lt;chr&gt;, tz_offset &lt;chr&gt;, date_time &lt;dttm&gt;,</span></span>
+<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a><span class="co">#&gt; #   date &lt;date&gt;, longitude &lt;dbl&gt;, latitude &lt;dbl&gt;, tz &lt;chr&gt;, t2sr &lt;dbl&gt;,</span></span>
+<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a><span class="co">#&gt; #   t2ss &lt;dbl&gt;, doy &lt;dbl&gt;, psel_by &lt;chr&gt;, psel_min &lt;dbl&gt;, psel_doy &lt;dbl&gt;,</span></span>
+<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a><span class="co">#&gt; #   psel &lt;dbl&gt;, psel_scaled &lt;dbl&gt;, psel_std &lt;dbl&gt;, psel_normalized &lt;dbl&gt;,</span></span>
+<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a><span class="co">#&gt; #   selection_group &lt;glue&gt;</span></span></code></pre></div>
 <p>This <code>w</code> data sets contains the original sampling
 recordings, but now also new columns containing various measures of the
 probability of selection.</p>
@@ -517,7 +519,7 @@ have.</p>
 <span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="co">#&gt; P09_1_2020_early    3    0</span></span></code></pre></div>
 <p>The recordings selected for sampling…</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>g<span class="sc">$</span>sites_base</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="co">#&gt; Simple feature collection with 19 features and 32 fields</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="co">#&gt; Simple feature collection with 19 features and 35 fields</span></span>
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co">#&gt; Geometry type: POINT</span></span>
 <span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co">#&gt; Dimension:     XY</span></span>
 <span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#&gt; Bounding box:  xmin: 124 ymin: -53.21667 xmax: 132 ymax: 238.3167</span></span>
@@ -534,61 +536,72 @@ have.</p>
 <span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="co">#&gt; 8  sample-08    Base     None 0.001167810  3.240657e-05 P06_1_2020_early   1  1</span></span>
 <span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="co">#&gt; 9  sample-09    Base     None 0.001167810  3.240657e-05 P06_1_2020_early   1  1</span></span>
 <span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="co">#&gt; 10 sample-10    Base     None 0.001167810 -3.701886e-04 P07_1_2020_early   1  1</span></span>
-<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a><span class="co">#&gt;    caty   aux time_period year                     file_name type</span></span>
-<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="co">#&gt; 1  None 0.001       early 2020 P01_1_20200503T052000_ARU.wav  wav</span></span>
-<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="co">#&gt; 2  None 0.001       early 2020 P01_1_20200503T052000_ARU.wav  wav</span></span>
-<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="co">#&gt; 3  None 0.001       early 2020 P01_1_20200503T052000_ARU.wav  wav</span></span>
-<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a><span class="co">#&gt; 4  None 0.001       early 2020 P02_1_20200504T052500_ARU.wav  wav</span></span>
-<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a><span class="co">#&gt; 5  None 0.001       early 2020 P02_1_20200504T052500_ARU.wav  wav</span></span>
-<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a><span class="co">#&gt; 6  None 0.001       early 2020 P02_1_20200504T052500_ARU.wav  wav</span></span>
-<span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a><span class="co">#&gt; 7  None 0.001       early 2020 P06_1_20200509T052000_ARU.wav  wav</span></span>
-<span id="cb8-27"><a href="#cb8-27" tabindex="-1"></a><span class="co">#&gt; 8  None 0.001       early 2020 P06_1_20200509T052000_ARU.wav  wav</span></span>
-<span id="cb8-28"><a href="#cb8-28" tabindex="-1"></a><span class="co">#&gt; 9  None 0.001       early 2020 P06_1_20200509T052000_ARU.wav  wav</span></span>
-<span id="cb8-29"><a href="#cb8-29" tabindex="-1"></a><span class="co">#&gt; 10 None 0.001       early 2020 P07_1_20200509T052500_ARU.wav  wav</span></span>
-<span id="cb8-30"><a href="#cb8-30" tabindex="-1"></a><span class="co">#&gt;                                                path  aru_type     aru_id</span></span>
-<span id="cb8-31"><a href="#cb8-31" tabindex="-1"></a><span class="co">#&gt; 1  a_BARLT10962_P01_1/P01_1_20200503T052000_ARU.wav     BarLT BARLT10962</span></span>
-<span id="cb8-32"><a href="#cb8-32" tabindex="-1"></a><span class="co">#&gt; 2  j_BARLT10962_P01_1/P01_1_20200503T052000_ARU.wav     BarLT BARLT10962</span></span>
-<span id="cb8-33"><a href="#cb8-33" tabindex="-1"></a><span class="co">#&gt; 3  o_BARLT10962_P01_1/P01_1_20200503T052000_ARU.wav     BarLT BARLT10962</span></span>
-<span id="cb8-34"><a href="#cb8-34" tabindex="-1"></a><span class="co">#&gt; 4    a_S4A01234_P02_1/P02_1_20200504T052500_ARU.wav SongMeter   S4A01234</span></span>
-<span id="cb8-35"><a href="#cb8-35" tabindex="-1"></a><span class="co">#&gt; 5    j_S4A01234_P02_1/P02_1_20200504T052500_ARU.wav SongMeter   S4A01234</span></span>
-<span id="cb8-36"><a href="#cb8-36" tabindex="-1"></a><span class="co">#&gt; 6    o_S4A01234_P02_1/P02_1_20200504T052500_ARU.wav SongMeter   S4A01234</span></span>
-<span id="cb8-37"><a href="#cb8-37" tabindex="-1"></a><span class="co">#&gt; 7  a_BARLT10962_P06_1/P06_1_20200509T052000_ARU.wav     BarLT BARLT10962</span></span>
-<span id="cb8-38"><a href="#cb8-38" tabindex="-1"></a><span class="co">#&gt; 8  j_BARLT10962_P06_1/P06_1_20200509T052000_ARU.wav     BarLT BARLT10962</span></span>
-<span id="cb8-39"><a href="#cb8-39" tabindex="-1"></a><span class="co">#&gt; 9  o_BARLT10962_P06_1/P06_1_20200509T052000_ARU.wav     BarLT BARLT10962</span></span>
-<span id="cb8-40"><a href="#cb8-40" tabindex="-1"></a><span class="co">#&gt; 10   a_S4A01234_P07_1/P07_1_20200509T052500_ARU.wav SongMeter   S4A01234</span></span>
-<span id="cb8-41"><a href="#cb8-41" tabindex="-1"></a><span class="co">#&gt;    site_id           date_time       date longitude latitude               tz</span></span>
-<span id="cb8-42"><a href="#cb8-42" tabindex="-1"></a><span class="co">#&gt; 1    P01_1 2020-05-03 05:20:00 2020-05-03    -85.03    50.01  America/Toronto</span></span>
-<span id="cb8-43"><a href="#cb8-43" tabindex="-1"></a><span class="co">#&gt; 2    P01_1 2020-05-03 05:20:00 2020-05-03    -85.03    50.01  America/Toronto</span></span>
-<span id="cb8-44"><a href="#cb8-44" tabindex="-1"></a><span class="co">#&gt; 3    P01_1 2020-05-03 05:20:00 2020-05-03    -85.03    50.01  America/Toronto</span></span>
-<span id="cb8-45"><a href="#cb8-45" tabindex="-1"></a><span class="co">#&gt; 4    P02_1 2020-05-04 05:25:00 2020-05-04    -87.45    52.68  America/Toronto</span></span>
-<span id="cb8-46"><a href="#cb8-46" tabindex="-1"></a><span class="co">#&gt; 5    P02_1 2020-05-04 05:25:00 2020-05-04    -87.45    52.68  America/Toronto</span></span>
-<span id="cb8-47"><a href="#cb8-47" tabindex="-1"></a><span class="co">#&gt; 6    P02_1 2020-05-04 05:25:00 2020-05-04    -87.45    52.68  America/Toronto</span></span>
-<span id="cb8-48"><a href="#cb8-48" tabindex="-1"></a><span class="co">#&gt; 7    P06_1 2020-05-09 05:20:00 2020-05-09    -90.08    52.00 America/Winnipeg</span></span>
-<span id="cb8-49"><a href="#cb8-49" tabindex="-1"></a><span class="co">#&gt; 8    P06_1 2020-05-09 05:20:00 2020-05-09    -90.08    52.00 America/Winnipeg</span></span>
-<span id="cb8-50"><a href="#cb8-50" tabindex="-1"></a><span class="co">#&gt; 9    P06_1 2020-05-09 05:20:00 2020-05-09    -90.08    52.00 America/Winnipeg</span></span>
-<span id="cb8-51"><a href="#cb8-51" tabindex="-1"></a><span class="co">#&gt; 10   P07_1 2020-05-09 05:25:00 2020-05-09    -86.03    50.45  America/Toronto</span></span>
-<span id="cb8-52"><a href="#cb8-52" tabindex="-1"></a><span class="co">#&gt;        t2ss psel_by   psel_min   psel_doy      psel psel_scaled psel_std</span></span>
-<span id="cb8-53"><a href="#cb8-53" tabindex="-1"></a><span class="co">#&gt; 1  498.4167    t2sr -0.5359972 -0.9351720 0.2296568   0.8502302        1</span></span>
-<span id="cb8-54"><a href="#cb8-54" tabindex="-1"></a><span class="co">#&gt; 2  498.4167    t2sr -0.5359972 -0.9351720 0.2296568   0.8502302        1</span></span>
-<span id="cb8-55"><a href="#cb8-55" tabindex="-1"></a><span class="co">#&gt; 3  498.4167    t2sr -0.5359972 -0.9351720 0.2296568   0.8502302        1</span></span>
-<span id="cb8-56"><a href="#cb8-56" tabindex="-1"></a><span class="co">#&gt; 4  483.4167    t2sr -0.5240265 -0.9200039 0.2359748   0.8736204        1</span></span>
-<span id="cb8-57"><a href="#cb8-57" tabindex="-1"></a><span class="co">#&gt; 5  483.4167    t2sr -0.5240265 -0.9200039 0.2359748   0.8736204        1</span></span>
-<span id="cb8-58"><a href="#cb8-58" tabindex="-1"></a><span class="co">#&gt; 6  483.4167    t2sr -0.5240265 -0.9200039 0.2359748   0.8736204        1</span></span>
-<span id="cb8-59"><a href="#cb8-59" tabindex="-1"></a><span class="co">#&gt; 7  521.9333    t2sr -0.4585242 -0.8503970 0.2701113   1.0000000        1</span></span>
-<span id="cb8-60"><a href="#cb8-60" tabindex="-1"></a><span class="co">#&gt; 8  521.9333    t2sr -0.4585242 -0.8503970 0.2701113   1.0000000        1</span></span>
-<span id="cb8-61"><a href="#cb8-61" tabindex="-1"></a><span class="co">#&gt; 9  521.9333    t2sr -0.4585242 -0.8503970 0.2701113   1.0000000        1</span></span>
-<span id="cb8-62"><a href="#cb8-62" tabindex="-1"></a><span class="co">#&gt; 10 488.7500    t2sr -0.5129536 -0.8503970 0.2558023   0.9470254        1</span></span>
-<span id="cb8-63"><a href="#cb8-63" tabindex="-1"></a><span class="co">#&gt;    psel_normalized  selection_group              geometry</span></span>
-<span id="cb8-64"><a href="#cb8-64" tabindex="-1"></a><span class="co">#&gt; 1            0.001 P01_1_2020_early POINT (124 -53.21667)</span></span>
-<span id="cb8-65"><a href="#cb8-65" tabindex="-1"></a><span class="co">#&gt; 2            0.001 P01_1_2020_early POINT (124 -53.21667)</span></span>
-<span id="cb8-66"><a href="#cb8-66" tabindex="-1"></a><span class="co">#&gt; 3            0.001 P01_1_2020_early POINT (124 -53.21667)</span></span>
-<span id="cb8-67"><a href="#cb8-67" tabindex="-1"></a><span class="co">#&gt; 4            0.001 P02_1_2020_early    POINT (125 -47.25)</span></span>
-<span id="cb8-68"><a href="#cb8-68" tabindex="-1"></a><span class="co">#&gt; 5            0.001 P02_1_2020_early    POINT (125 -47.25)</span></span>
-<span id="cb8-69"><a href="#cb8-69" tabindex="-1"></a><span class="co">#&gt; 6            0.001 P02_1_2020_early    POINT (125 -47.25)</span></span>
-<span id="cb8-70"><a href="#cb8-70" tabindex="-1"></a><span class="co">#&gt; 7            0.001 P06_1_2020_early  POINT (130 3.583333)</span></span>
-<span id="cb8-71"><a href="#cb8-71" tabindex="-1"></a><span class="co">#&gt; 8            0.001 P06_1_2020_early  POINT (130 3.583333)</span></span>
-<span id="cb8-72"><a href="#cb8-72" tabindex="-1"></a><span class="co">#&gt; 9            0.001 P06_1_2020_early  POINT (130 3.583333)</span></span>
-<span id="cb8-73"><a href="#cb8-73" tabindex="-1"></a><span class="co">#&gt; 10           0.001 P07_1_2020_early POINT (130 -40.93333)</span></span></code></pre></div>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a><span class="co">#&gt;    caty   aux time_period year                          file_name type</span></span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="co">#&gt; 1  None 0.001       early 2020 P01_1_20200503T052000-0400_ARU.wav  wav</span></span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="co">#&gt; 2  None 0.001       early 2020 P01_1_20200503T052000-0400_ARU.wav  wav</span></span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="co">#&gt; 3  None 0.001       early 2020 P01_1_20200503T052000-0400_ARU.wav  wav</span></span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a><span class="co">#&gt; 4  None 0.001       early 2020      P02_1_20200504T052500_ARU.wav  wav</span></span>
+<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a><span class="co">#&gt; 5  None 0.001       early 2020      P02_1_20200504T052500_ARU.wav  wav</span></span>
+<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a><span class="co">#&gt; 6  None 0.001       early 2020      P02_1_20200504T052500_ARU.wav  wav</span></span>
+<span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a><span class="co">#&gt; 7  None 0.001       early 2020 P06_1_20200509T052000-0400_ARU.wav  wav</span></span>
+<span id="cb8-27"><a href="#cb8-27" tabindex="-1"></a><span class="co">#&gt; 8  None 0.001       early 2020 P06_1_20200509T052000-0400_ARU.wav  wav</span></span>
+<span id="cb8-28"><a href="#cb8-28" tabindex="-1"></a><span class="co">#&gt; 9  None 0.001       early 2020 P06_1_20200509T052000-0400_ARU.wav  wav</span></span>
+<span id="cb8-29"><a href="#cb8-29" tabindex="-1"></a><span class="co">#&gt; 10 None 0.001       early 2020      P07_1_20200509T052500_ARU.wav  wav</span></span>
+<span id="cb8-30"><a href="#cb8-30" tabindex="-1"></a><span class="co">#&gt;                                                     path     aru_id</span></span>
+<span id="cb8-31"><a href="#cb8-31" tabindex="-1"></a><span class="co">#&gt; 1  a_BARLT10962_P01_1/P01_1_20200503T052000-0400_ARU.wav BARLT10962</span></span>
+<span id="cb8-32"><a href="#cb8-32" tabindex="-1"></a><span class="co">#&gt; 2  j_BARLT10962_P01_1/P01_1_20200503T052000-0400_ARU.wav BARLT10962</span></span>
+<span id="cb8-33"><a href="#cb8-33" tabindex="-1"></a><span class="co">#&gt; 3  o_BARLT10962_P01_1/P01_1_20200503T052000-0400_ARU.wav BARLT10962</span></span>
+<span id="cb8-34"><a href="#cb8-34" tabindex="-1"></a><span class="co">#&gt; 4         a_S4A01234_P02_1/P02_1_20200504T052500_ARU.wav   S4A01234</span></span>
+<span id="cb8-35"><a href="#cb8-35" tabindex="-1"></a><span class="co">#&gt; 5         j_S4A01234_P02_1/P02_1_20200504T052500_ARU.wav   S4A01234</span></span>
+<span id="cb8-36"><a href="#cb8-36" tabindex="-1"></a><span class="co">#&gt; 6         o_S4A01234_P02_1/P02_1_20200504T052500_ARU.wav   S4A01234</span></span>
+<span id="cb8-37"><a href="#cb8-37" tabindex="-1"></a><span class="co">#&gt; 7  a_BARLT10962_P06_1/P06_1_20200509T052000-0400_ARU.wav BARLT10962</span></span>
+<span id="cb8-38"><a href="#cb8-38" tabindex="-1"></a><span class="co">#&gt; 8  j_BARLT10962_P06_1/P06_1_20200509T052000-0400_ARU.wav BARLT10962</span></span>
+<span id="cb8-39"><a href="#cb8-39" tabindex="-1"></a><span class="co">#&gt; 9  o_BARLT10962_P06_1/P06_1_20200509T052000-0400_ARU.wav BARLT10962</span></span>
+<span id="cb8-40"><a href="#cb8-40" tabindex="-1"></a><span class="co">#&gt; 10        a_S4A01234_P07_1/P07_1_20200509T052500_ARU.wav   S4A01234</span></span>
+<span id="cb8-41"><a href="#cb8-41" tabindex="-1"></a><span class="co">#&gt;          manufacturer        model  aru_type site_id tz_offset</span></span>
+<span id="cb8-42"><a href="#cb8-42" tabindex="-1"></a><span class="co">#&gt; 1       Frontier Labs       BAR-LT     BARLT   P01_1     -0400</span></span>
+<span id="cb8-43"><a href="#cb8-43" tabindex="-1"></a><span class="co">#&gt; 2       Frontier Labs       BAR-LT     BARLT   P01_1     -0400</span></span>
+<span id="cb8-44"><a href="#cb8-44" tabindex="-1"></a><span class="co">#&gt; 3       Frontier Labs       BAR-LT     BARLT   P01_1     -0400</span></span>
+<span id="cb8-45"><a href="#cb8-45" tabindex="-1"></a><span class="co">#&gt; 4  Wildlife Acoustics Song Meter 4 SongMeter   P02_1      &lt;NA&gt;</span></span>
+<span id="cb8-46"><a href="#cb8-46" tabindex="-1"></a><span class="co">#&gt; 5  Wildlife Acoustics Song Meter 4 SongMeter   P02_1      &lt;NA&gt;</span></span>
+<span id="cb8-47"><a href="#cb8-47" tabindex="-1"></a><span class="co">#&gt; 6  Wildlife Acoustics Song Meter 4 SongMeter   P02_1      &lt;NA&gt;</span></span>
+<span id="cb8-48"><a href="#cb8-48" tabindex="-1"></a><span class="co">#&gt; 7       Frontier Labs       BAR-LT     BARLT   P06_1     -0400</span></span>
+<span id="cb8-49"><a href="#cb8-49" tabindex="-1"></a><span class="co">#&gt; 8       Frontier Labs       BAR-LT     BARLT   P06_1     -0400</span></span>
+<span id="cb8-50"><a href="#cb8-50" tabindex="-1"></a><span class="co">#&gt; 9       Frontier Labs       BAR-LT     BARLT   P06_1     -0400</span></span>
+<span id="cb8-51"><a href="#cb8-51" tabindex="-1"></a><span class="co">#&gt; 10 Wildlife Acoustics Song Meter 4 SongMeter   P07_1      &lt;NA&gt;</span></span>
+<span id="cb8-52"><a href="#cb8-52" tabindex="-1"></a><span class="co">#&gt;              date_time       date longitude latitude               tz     t2ss</span></span>
+<span id="cb8-53"><a href="#cb8-53" tabindex="-1"></a><span class="co">#&gt; 1  2020-05-03 05:20:00 2020-05-03    -85.03    50.01  America/Toronto 498.4167</span></span>
+<span id="cb8-54"><a href="#cb8-54" tabindex="-1"></a><span class="co">#&gt; 2  2020-05-03 05:20:00 2020-05-03    -85.03    50.01  America/Toronto 498.4167</span></span>
+<span id="cb8-55"><a href="#cb8-55" tabindex="-1"></a><span class="co">#&gt; 3  2020-05-03 05:20:00 2020-05-03    -85.03    50.01  America/Toronto 498.4167</span></span>
+<span id="cb8-56"><a href="#cb8-56" tabindex="-1"></a><span class="co">#&gt; 4  2020-05-04 05:25:00 2020-05-04    -87.45    52.68  America/Toronto 483.4167</span></span>
+<span id="cb8-57"><a href="#cb8-57" tabindex="-1"></a><span class="co">#&gt; 5  2020-05-04 05:25:00 2020-05-04    -87.45    52.68  America/Toronto 483.4167</span></span>
+<span id="cb8-58"><a href="#cb8-58" tabindex="-1"></a><span class="co">#&gt; 6  2020-05-04 05:25:00 2020-05-04    -87.45    52.68  America/Toronto 483.4167</span></span>
+<span id="cb8-59"><a href="#cb8-59" tabindex="-1"></a><span class="co">#&gt; 7  2020-05-09 05:20:00 2020-05-09    -90.08    52.00 America/Winnipeg 521.9333</span></span>
+<span id="cb8-60"><a href="#cb8-60" tabindex="-1"></a><span class="co">#&gt; 8  2020-05-09 05:20:00 2020-05-09    -90.08    52.00 America/Winnipeg 521.9333</span></span>
+<span id="cb8-61"><a href="#cb8-61" tabindex="-1"></a><span class="co">#&gt; 9  2020-05-09 05:20:00 2020-05-09    -90.08    52.00 America/Winnipeg 521.9333</span></span>
+<span id="cb8-62"><a href="#cb8-62" tabindex="-1"></a><span class="co">#&gt; 10 2020-05-09 05:25:00 2020-05-09    -86.03    50.45  America/Toronto 488.7500</span></span>
+<span id="cb8-63"><a href="#cb8-63" tabindex="-1"></a><span class="co">#&gt;    psel_by   psel_min   psel_doy      psel psel_scaled psel_std psel_normalized</span></span>
+<span id="cb8-64"><a href="#cb8-64" tabindex="-1"></a><span class="co">#&gt; 1     t2sr -0.5359972 -0.9351720 0.2296568   0.8502302        1           0.001</span></span>
+<span id="cb8-65"><a href="#cb8-65" tabindex="-1"></a><span class="co">#&gt; 2     t2sr -0.5359972 -0.9351720 0.2296568   0.8502302        1           0.001</span></span>
+<span id="cb8-66"><a href="#cb8-66" tabindex="-1"></a><span class="co">#&gt; 3     t2sr -0.5359972 -0.9351720 0.2296568   0.8502302        1           0.001</span></span>
+<span id="cb8-67"><a href="#cb8-67" tabindex="-1"></a><span class="co">#&gt; 4     t2sr -0.5240265 -0.9200039 0.2359748   0.8736204        1           0.001</span></span>
+<span id="cb8-68"><a href="#cb8-68" tabindex="-1"></a><span class="co">#&gt; 5     t2sr -0.5240265 -0.9200039 0.2359748   0.8736204        1           0.001</span></span>
+<span id="cb8-69"><a href="#cb8-69" tabindex="-1"></a><span class="co">#&gt; 6     t2sr -0.5240265 -0.9200039 0.2359748   0.8736204        1           0.001</span></span>
+<span id="cb8-70"><a href="#cb8-70" tabindex="-1"></a><span class="co">#&gt; 7     t2sr -0.4585242 -0.8503970 0.2701113   1.0000000        1           0.001</span></span>
+<span id="cb8-71"><a href="#cb8-71" tabindex="-1"></a><span class="co">#&gt; 8     t2sr -0.4585242 -0.8503970 0.2701113   1.0000000        1           0.001</span></span>
+<span id="cb8-72"><a href="#cb8-72" tabindex="-1"></a><span class="co">#&gt; 9     t2sr -0.4585242 -0.8503970 0.2701113   1.0000000        1           0.001</span></span>
+<span id="cb8-73"><a href="#cb8-73" tabindex="-1"></a><span class="co">#&gt; 10    t2sr -0.5129536 -0.8503970 0.2558023   0.9470254        1           0.001</span></span>
+<span id="cb8-74"><a href="#cb8-74" tabindex="-1"></a><span class="co">#&gt;     selection_group              geometry</span></span>
+<span id="cb8-75"><a href="#cb8-75" tabindex="-1"></a><span class="co">#&gt; 1  P01_1_2020_early POINT (124 -53.21667)</span></span>
+<span id="cb8-76"><a href="#cb8-76" tabindex="-1"></a><span class="co">#&gt; 2  P01_1_2020_early POINT (124 -53.21667)</span></span>
+<span id="cb8-77"><a href="#cb8-77" tabindex="-1"></a><span class="co">#&gt; 3  P01_1_2020_early POINT (124 -53.21667)</span></span>
+<span id="cb8-78"><a href="#cb8-78" tabindex="-1"></a><span class="co">#&gt; 4  P02_1_2020_early    POINT (125 -47.25)</span></span>
+<span id="cb8-79"><a href="#cb8-79" tabindex="-1"></a><span class="co">#&gt; 5  P02_1_2020_early    POINT (125 -47.25)</span></span>
+<span id="cb8-80"><a href="#cb8-80" tabindex="-1"></a><span class="co">#&gt; 6  P02_1_2020_early    POINT (125 -47.25)</span></span>
+<span id="cb8-81"><a href="#cb8-81" tabindex="-1"></a><span class="co">#&gt; 7  P06_1_2020_early  POINT (130 3.583333)</span></span>
+<span id="cb8-82"><a href="#cb8-82" tabindex="-1"></a><span class="co">#&gt; 8  P06_1_2020_early  POINT (130 3.583333)</span></span>
+<span id="cb8-83"><a href="#cb8-83" tabindex="-1"></a><span class="co">#&gt; 9  P06_1_2020_early  POINT (130 3.583333)</span></span>
+<span id="cb8-84"><a href="#cb8-84" tabindex="-1"></a><span class="co">#&gt; 10 P07_1_2020_early POINT (130 -40.93333)</span></span></code></pre></div>
 
 
 

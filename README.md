@@ -13,19 +13,23 @@ badge](https://arutools.r-universe.dev/badges/ARUtools)](https://arutools.r-univ
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![R-CMD-check](https://github.com/ARUtools/ARUtools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ARUtools/ARUtools/actions/workflows/R-CMD-check.yaml)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/ARUtools)](https://CRAN.R-project.org/package=ARUtools)
 <!-- badges: end -->
 
 The goal of ARUtools is to facilitate the processing of ARU data and
-subsampling of recordings. It remains a development version for now.
-What this means for you as a user is that function names and variable
-names may change between versions and some functions may become defunct.
+subsampling of recordings. Parse Autonomous Recording Unit (ARU) data
+and for sub-sampling recordings. Extract Metadata from your recordings,
+select a subset of recordings for interpretation, and prepare files for
+processing on the ‘WildTrax’ <https://wildtrax.ca/> platform. Read and
+process metadata from recordings collected using the SongMeter and
+BAR-LT types of ARUs.
 
 ## Installation
 
 The easiest way to install ARUtools is with
 
 ``` r
-
 install.packages("ARUtools")
 ```
 

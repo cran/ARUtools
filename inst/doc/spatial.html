@@ -49,7 +49,7 @@ overflow: visible;
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -351,14 +351,15 @@ first.</p>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co">#&gt; Extracting ARU info...</span></span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt; Extracting Dates and Times...</span></span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>m</span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; # A tibble: 42 × 8</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt;   file_name   type  path  aru_type aru_id site_id date_time           date      </span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;   &lt;dttm&gt;              &lt;date&gt;    </span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_2020… wav   a_BA… BarLT    BARLT… P01_1   2020-05-02 05:00:00 2020-05-02</span></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_2020… wav   a_BA… BarLT    BARLT… P01_1   2020-05-03 05:20:00 2020-05-03</span></span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_2020… wav   a_S4… SongMet… S4A01… P02_1   2020-05-04 05:25:00 2020-05-04</span></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_2020… wav   a_S4… SongMet… S4A01… P02_1   2020-05-05 07:30:00 2020-05-05</span></span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt; # ℹ 38 more rows</span></span></code></pre></div>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; # A tibble: 42 × 11</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt; # ℹ 38 more rows</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co">#&gt; # ℹ 2 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;</span></span></code></pre></div>
 <p>This isn’t spatial because we don’t actually know where the sites are
 located. But our next step is to get our site coordinates.</p>
 <p>Let’s assume we have a spatial data frame containing our sites and
@@ -422,38 +423,39 @@ add these sites to our metadata.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">add_sites</span>(m, sites)</span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#&gt; Joining by columns `date_time_start` and `date_time_end`</span></span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>m</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; Simple feature collection with 42 features and 8 fields</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; Simple feature collection with 42 features and 11 fields</span></span>
 <span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt; Geometry type: POINT</span></span>
 <span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt; Dimension:     XY</span></span>
 <span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt; Bounding box:  xmin: -91.38 ymin: 45 xmax: -84.45 ymax: 52.68</span></span>
 <span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#&gt; # A tibble: 42 × 9</span></span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co">#&gt;   file_name   type  path  aru_type aru_id site_id date_time           date      </span></span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="co">#&gt; * &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;   &lt;dttm&gt;              &lt;date&gt;    </span></span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_2020… wav   a_BA… BarLT    BARLT… P01_1   2020-05-02 05:00:00 2020-05-02</span></span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_2020… wav   a_BA… BarLT    BARLT… P01_1   2020-05-03 05:20:00 2020-05-03</span></span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_2020… wav   a_S4… SongMet… S4A01… P02_1   2020-05-04 05:25:00 2020-05-04</span></span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_2020… wav   a_S4… SongMet… S4A01… P02_1   2020-05-05 07:30:00 2020-05-05</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#&gt; # A tibble: 42 × 12</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="co">#&gt; * &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
 <span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="co">#&gt; # ℹ 38 more rows</span></span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co">#&gt; # ℹ 1 more variable: geometry &lt;POINT [°]&gt;</span></span></code></pre></div>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co">#&gt; # ℹ 3 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;, geometry &lt;POINT [°]&gt;</span></span></code></pre></div>
 <p>Again our output is as a spatial data set.</p>
 <p>Let’s continue by adding times to sunrise/sunset.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">calc_sun</span>(m)</span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>m</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt; Simple feature collection with 42 features and 11 fields</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt; Simple feature collection with 42 features and 14 fields</span></span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt; Geometry type: POINT</span></span>
 <span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt; Dimension:     XY</span></span>
 <span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt; Bounding box:  xmin: -91.38 ymin: 45 xmax: -84.45 ymax: 52.68</span></span>
 <span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt; # A tibble: 42 × 12</span></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt;   file_name   type  path  aru_type aru_id site_id date_time           date      </span></span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;   &lt;dttm&gt;              &lt;date&gt;    </span></span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_2020… wav   a_BA… BarLT    BARLT… P01_1   2020-05-02 05:00:00 2020-05-02</span></span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_2020… wav   a_BA… BarLT    BARLT… P01_1   2020-05-03 05:20:00 2020-05-03</span></span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_2020… wav   a_S4… SongMet… S4A01… P02_1   2020-05-04 05:25:00 2020-05-04</span></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_2020… wav   a_S4… SongMet… S4A01… P02_1   2020-05-05 07:30:00 2020-05-05</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt; # A tibble: 42 × 15</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
 <span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co">#&gt; # ℹ 38 more rows</span></span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co">#&gt; # ℹ 4 more variables: tz &lt;chr&gt;, t2sr &lt;dbl&gt;, t2ss &lt;dbl&gt;, geometry &lt;POINT [°]&gt;</span></span></code></pre></div>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co">#&gt; # ℹ 6 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;, tz &lt;chr&gt;, t2sr &lt;dbl&gt;,</span></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co">#&gt; #   t2ss &lt;dbl&gt;, geometry &lt;POINT [°]&gt;</span></span></code></pre></div>
 <p>All done! And we’ve retained a spatial data set the entire way.</p>
 <div id="problems" class="section level2">
 <h2>Problems</h2>
@@ -486,15 +488,16 @@ of sites.</p>
 <span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a><span class="co">#&gt; Warning in add_sites(m, sites): Cannot have missing coordinates in spatial data frames</span></span>
 <span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a><span class="co">#&gt; • Returning non-spatial data frame</span></span>
 <span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a>m</span>
-<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a><span class="co">#&gt; # A tibble: 42 × 10</span></span>
-<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a><span class="co">#&gt;   file_name   type  path  aru_type aru_id site_id date_time           date      </span></span>
-<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;   &lt;dttm&gt;              &lt;date&gt;    </span></span>
-<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_2020… wav   a_BA… BarLT    BARLT… P01_1   2020-05-02 05:00:00 2020-05-02</span></span>
-<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_2020… wav   a_BA… BarLT    BARLT… P01_1   2020-05-03 05:20:00 2020-05-03</span></span>
-<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_2020… wav   a_S4… SongMet… S4A01… P02_1   2020-05-04 05:25:00 2020-05-04</span></span>
-<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_2020… wav   a_S4… SongMet… S4A01… P02_1   2020-05-05 07:30:00 2020-05-05</span></span>
+<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a><span class="co">#&gt; # A tibble: 42 × 13</span></span>
+<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
+<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
+<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
+<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
 <span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a><span class="co">#&gt; # ℹ 38 more rows</span></span>
-<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a><span class="co">#&gt; # ℹ 2 more variables: longitude &lt;dbl&gt;, latitude &lt;dbl&gt;</span></span></code></pre></div>
+<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a><span class="co">#&gt; # ℹ 4 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;, longitude &lt;dbl&gt;,</span></span>
+<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a><span class="co">#&gt; #   latitude &lt;dbl&gt;</span></span></code></pre></div>
 <p>To resolve this, either add in the missing site information, or omit
 the files before joining.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">clean_metadata</span>(<span class="at">project_files =</span> example_files) <span class="sc">|&gt;</span></span>
@@ -505,20 +508,20 @@ the files before joining.</p>
 <span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">add_sites</span>(m, sites)</span>
 <span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#&gt; Joining by columns `date_time_start` and `date_time_end`</span></span>
 <span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>m</span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co">#&gt; Simple feature collection with 36 features and 8 fields</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co">#&gt; Simple feature collection with 36 features and 11 fields</span></span>
 <span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co">#&gt; Geometry type: POINT</span></span>
 <span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="co">#&gt; Dimension:     XY</span></span>
 <span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="co">#&gt; Bounding box:  xmin: -91.38 ymin: 45 xmax: -84.45 ymax: 52.68</span></span>
 <span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
-<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="co">#&gt; # A tibble: 36 × 9</span></span>
-<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="co">#&gt;   file_name   type  path  aru_type aru_id site_id date_time           date      </span></span>
-<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="co">#&gt; * &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;   &lt;dttm&gt;              &lt;date&gt;    </span></span>
-<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="co">#&gt; 1 P02_1_2020… wav   a_S4… SongMet… S4A01… P02_1   2020-05-04 05:25:00 2020-05-04</span></span>
-<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="co">#&gt; 2 P02_1_2020… wav   a_S4… SongMet… S4A01… P02_1   2020-05-05 07:30:00 2020-05-05</span></span>
-<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a><span class="co">#&gt; 3 P03_1_2020… wav   a_BA… BarLT    BARLT… P03_1   2020-05-06 10:00:00 2020-05-06</span></span>
-<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="co">#&gt; 4 P04_1_2020… wav   a_BA… BarLT    BARLT… P04_1   2020-05-06 05:00:00 2020-05-06</span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="co">#&gt; # A tibble: 36 × 12</span></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="co">#&gt; * &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="co">#&gt; 1 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="co">#&gt; 2 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a><span class="co">#&gt; 3 P03_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P03_1   -0400    </span></span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="co">#&gt; 4 P04_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P04_1   -0400    </span></span>
 <span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="co">#&gt; # ℹ 32 more rows</span></span>
-<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="co">#&gt; # ℹ 1 more variable: geometry &lt;POINT [°]&gt;</span></span></code></pre></div>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="co">#&gt; # ℹ 3 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;, geometry &lt;POINT [°]&gt;</span></span></code></pre></div>
 <p>Fixed!</p>
 </div>
 

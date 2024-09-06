@@ -49,7 +49,7 @@ overflow: visible;
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -359,12 +359,12 @@ sunset information.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(ARUtools)</span></code></pre></div>
 <p>Let’s use some example data to get started.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">head</span>(example_files)</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co">#&gt; [1] &quot;a_BARLT10962_P01_1/P01_1_20200502T050000_ARU.wav&quot;</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt; [2] &quot;a_BARLT10962_P01_1/P01_1_20200503T052000_ARU.wav&quot;</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; [3] &quot;a_S4A01234_P02_1/P02_1_20200504T052500_ARU.wav&quot;  </span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; [4] &quot;a_S4A01234_P02_1/P02_1_20200505T073000_ARU.wav&quot;  </span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; [5] &quot;a_BARLT10962_P03_1/P03_1_20200506T100000_ARU.wav&quot;</span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; [6] &quot;a_BARLT11111_P04_1/P04_1_20200506T050000_ARU.wav&quot;</span></span></code></pre></div>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co">#&gt; [1] &quot;a_BARLT10962_P01_1/P01_1_20200502T050000-0400_ARU.wav&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt; [2] &quot;a_BARLT10962_P01_1/P01_1_20200503T052000-0400_ARU.wav&quot;</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; [3] &quot;a_S4A01234_P02_1/P02_1_20200504T052500_ARU.wav&quot;       </span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; [4] &quot;a_S4A01234_P02_1/P02_1_20200505T073000_ARU.wav&quot;       </span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; [5] &quot;a_BARLT10962_P03_1/P03_1_20200506T100000-0400_ARU.wav&quot;</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; [6] &quot;a_BARLT11111_P04_1/P04_1_20200506T050000-0400_ARU.wav&quot;</span></span></code></pre></div>
 <p>This is a list of hypothetical ARU files from different sites, and
 using different ARUs. This is fairly messily organized data in that
 there is no clear structure to the folders and there appear to be
@@ -380,14 +380,15 @@ files.</p>
 ARU Id, and date/time, we can extract all the information without having
 to change any of the default arguments.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>m</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">#&gt; # A tibble: 42 × 8</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt;   file_name   type  path  aru_type aru_id site_id date_time           date      </span></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;   &lt;dttm&gt;              &lt;date&gt;    </span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_2020… wav   a_BA… BarLT    BARLT… P01_1   2020-05-02 05:00:00 2020-05-02</span></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_2020… wav   a_BA… BarLT    BARLT… P01_1   2020-05-03 05:20:00 2020-05-03</span></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_2020… wav   a_S4… SongMet… S4A01… P02_1   2020-05-04 05:25:00 2020-05-04</span></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_2020… wav   a_S4… SongMet… S4A01… P02_1   2020-05-05 07:30:00 2020-05-05</span></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; # ℹ 38 more rows</span></span></code></pre></div>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">#&gt; # A tibble: 42 × 11</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; # ℹ 38 more rows</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; # ℹ 2 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;</span></span></code></pre></div>
 <p>If you were reading directly from files you would assign a base
 directory and then have <code>clean_metadata</code> read the files in
 that folder and sub-folders.</p>
@@ -514,16 +515,16 @@ vectors.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">add_sites</span>(m, sites)</span>
 <span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="co">#&gt; Joining by columns `date_time_start` and `date_time_end`</span></span>
 <span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>m</span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co">#&gt; # A tibble: 42 × 12</span></span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co">#&gt;   file_name   type  path  aru_type aru_id site_id date_time           date      </span></span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;   &lt;dttm&gt;              &lt;date&gt;    </span></span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_2020… wav   a_BA… BarLT    BARLT… P01_1   2020-05-02 05:00:00 2020-05-02</span></span>
-<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_2020… wav   a_BA… BarLT    BARLT… P01_1   2020-05-03 05:20:00 2020-05-03</span></span>
-<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_2020… wav   a_S4… SongMet… S4A01… P02_1   2020-05-04 05:25:00 2020-05-04</span></span>
-<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_2020… wav   a_S4… SongMet… S4A01… P02_1   2020-05-05 07:30:00 2020-05-05</span></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co">#&gt; # A tibble: 42 × 15</span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
 <span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a><span class="co">#&gt; # ℹ 38 more rows</span></span>
-<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a><span class="co">#&gt; # ℹ 4 more variables: longitude &lt;dbl&gt;, latitude &lt;dbl&gt;, plot &lt;chr&gt;,</span></span>
-<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a><span class="co">#&gt; #   subplot &lt;chr&gt;</span></span></code></pre></div>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a><span class="co">#&gt; # ℹ 6 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;, longitude &lt;dbl&gt;,</span></span>
+<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a><span class="co">#&gt; #   latitude &lt;dbl&gt;, plot &lt;chr&gt;, subplot &lt;chr&gt;</span></span></code></pre></div>
 </div>
 <div id="calculate-times-to-sunrise-and-sunset" class="section level2">
 <h2>Calculate times to sunrise and sunset</h2>
@@ -552,22 +553,25 @@ default setting.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">calc_sun</span>(m)</span>
 <span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(m)</span>
 <span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="co">#&gt; Rows: 42</span></span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co">#&gt; Columns: 15</span></span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="co">#&gt; $ file_name &lt;chr&gt; &quot;P01_1_20200502T050000_ARU.wav&quot;, &quot;P01_1_20200503T052000_ARU.…</span></span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="co">#&gt; $ type      &lt;chr&gt; &quot;wav&quot;, &quot;wav&quot;, &quot;wav&quot;, &quot;wav&quot;, &quot;wav&quot;, &quot;wav&quot;, &quot;wav&quot;, &quot;wav&quot;, &quot;wav…</span></span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="co">#&gt; $ path      &lt;chr&gt; &quot;a_BARLT10962_P01_1/P01_1_20200502T050000_ARU.wav&quot;, &quot;a_BARLT…</span></span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="co">#&gt; $ aru_type  &lt;chr&gt; &quot;BarLT&quot;, &quot;BarLT&quot;, &quot;SongMeter&quot;, &quot;SongMeter&quot;, &quot;BarLT&quot;, &quot;BarLT&quot;…</span></span>
-<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="co">#&gt; $ aru_id    &lt;chr&gt; &quot;BARLT10962&quot;, &quot;BARLT10962&quot;, &quot;S4A01234&quot;, &quot;S4A01234&quot;, &quot;BARLT10…</span></span>
-<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="co">#&gt; $ site_id   &lt;chr&gt; &quot;P01_1&quot;, &quot;P01_1&quot;, &quot;P02_1&quot;, &quot;P02_1&quot;, &quot;P03_1&quot;, &quot;P04_1&quot;, &quot;P04_1…</span></span>
-<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a><span class="co">#&gt; $ date_time &lt;dttm&gt; 2020-05-02 05:00:00, 2020-05-03 05:20:00, 2020-05-04 05:25:…</span></span>
-<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a><span class="co">#&gt; $ date      &lt;date&gt; 2020-05-02, 2020-05-03, 2020-05-04, 2020-05-05, 2020-05-06,…</span></span>
-<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a><span class="co">#&gt; $ longitude &lt;dbl&gt; -85.03, -85.03, -87.45, -87.45, -90.38, -85.53, -85.53, -88.…</span></span>
-<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a><span class="co">#&gt; $ latitude  &lt;dbl&gt; 50.010, 50.010, 52.680, 52.680, 48.990, 45.000, 45.000, 51.0…</span></span>
-<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a><span class="co">#&gt; $ plot      &lt;chr&gt; &quot;Plot1&quot;, &quot;Plot1&quot;, &quot;Plot1&quot;, &quot;Plot1&quot;, &quot;Plot2&quot;, &quot;Plot2&quot;, &quot;Plot2…</span></span>
-<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a><span class="co">#&gt; $ subplot   &lt;chr&gt; &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;b&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, …</span></span>
-<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a><span class="co">#&gt; $ tz        &lt;chr&gt; &quot;America/Toronto&quot;, &quot;America/Toronto&quot;, &quot;America/Toronto&quot;, &quot;Am…</span></span>
-<span id="cb13-18"><a href="#cb13-18" tabindex="-1"></a><span class="co">#&gt; $ t2sr      &lt;dbl&gt; -74.933333, -53.216667, -47.250000, 79.616667, 207.133333, -…</span></span>
-<span id="cb13-19"><a href="#cb13-19" tabindex="-1"></a><span class="co">#&gt; $ t2ss      &lt;dbl&gt; 479.9500, 498.4167, 483.4167, 606.6833, -685.8833, 486.1833,…</span></span></code></pre></div>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co">#&gt; Columns: 18</span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="co">#&gt; $ file_name    &lt;chr&gt; &quot;P01_1_20200502T050000-0400_ARU.wav&quot;, &quot;P01_1_20200503T052…</span></span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="co">#&gt; $ type         &lt;chr&gt; &quot;wav&quot;, &quot;wav&quot;, &quot;wav&quot;, &quot;wav&quot;, &quot;wav&quot;, &quot;wav&quot;, &quot;wav&quot;, &quot;wav&quot;, &quot;…</span></span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="co">#&gt; $ path         &lt;chr&gt; &quot;a_BARLT10962_P01_1/P01_1_20200502T050000-0400_ARU.wav&quot;, …</span></span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="co">#&gt; $ aru_id       &lt;chr&gt; &quot;BARLT10962&quot;, &quot;BARLT10962&quot;, &quot;S4A01234&quot;, &quot;S4A01234&quot;, &quot;BARL…</span></span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="co">#&gt; $ manufacturer &lt;chr&gt; &quot;Frontier Labs&quot;, &quot;Frontier Labs&quot;, &quot;Wildlife Acoustics&quot;, &quot;…</span></span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="co">#&gt; $ model        &lt;chr&gt; &quot;BAR-LT&quot;, &quot;BAR-LT&quot;, &quot;Song Meter 4&quot;, &quot;Song Meter 4&quot;, &quot;BAR-…</span></span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a><span class="co">#&gt; $ aru_type     &lt;chr&gt; &quot;BARLT&quot;, &quot;BARLT&quot;, &quot;SongMeter&quot;, &quot;SongMeter&quot;, &quot;BARLT&quot;, &quot;BAR…</span></span>
+<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a><span class="co">#&gt; $ site_id      &lt;chr&gt; &quot;P01_1&quot;, &quot;P01_1&quot;, &quot;P02_1&quot;, &quot;P02_1&quot;, &quot;P03_1&quot;, &quot;P04_1&quot;, &quot;P0…</span></span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a><span class="co">#&gt; $ tz_offset    &lt;chr&gt; &quot;-0400&quot;, &quot;-0400&quot;, NA, NA, &quot;-0400&quot;, &quot;-0400&quot;, &quot;-0400&quot;, &quot;-04…</span></span>
+<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a><span class="co">#&gt; $ date_time    &lt;dttm&gt; 2020-05-02 05:00:00, 2020-05-03 05:20:00, 2020-05-04 05:…</span></span>
+<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a><span class="co">#&gt; $ date         &lt;date&gt; 2020-05-02, 2020-05-03, 2020-05-04, 2020-05-05, 2020-05-…</span></span>
+<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a><span class="co">#&gt; $ longitude    &lt;dbl&gt; -85.03, -85.03, -87.45, -87.45, -90.38, -85.53, -85.53, -…</span></span>
+<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a><span class="co">#&gt; $ latitude     &lt;dbl&gt; 50.010, 50.010, 52.680, 52.680, 48.990, 45.000, 45.000, 5…</span></span>
+<span id="cb13-18"><a href="#cb13-18" tabindex="-1"></a><span class="co">#&gt; $ plot         &lt;chr&gt; &quot;Plot1&quot;, &quot;Plot1&quot;, &quot;Plot1&quot;, &quot;Plot1&quot;, &quot;Plot2&quot;, &quot;Plot2&quot;, &quot;Pl…</span></span>
+<span id="cb13-19"><a href="#cb13-19" tabindex="-1"></a><span class="co">#&gt; $ subplot      &lt;chr&gt; &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;b&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a…</span></span>
+<span id="cb13-20"><a href="#cb13-20" tabindex="-1"></a><span class="co">#&gt; $ tz           &lt;chr&gt; &quot;America/Toronto&quot;, &quot;America/Toronto&quot;, &quot;America/Toronto&quot;, …</span></span>
+<span id="cb13-21"><a href="#cb13-21" tabindex="-1"></a><span class="co">#&gt; $ t2sr         &lt;dbl&gt; -74.933333, -53.216667, -47.250000, 79.616667, 207.133333…</span></span>
+<span id="cb13-22"><a href="#cb13-22" tabindex="-1"></a><span class="co">#&gt; $ t2ss         &lt;dbl&gt; 479.9500, 498.4167, 483.4167, 606.6833, -685.8833, 486.18…</span></span></code></pre></div>
 <p>Tada! Now we have a complete set of cleaned metadata associated with
 each recording.</p>
 <p>This is a very simple example and much of the pain in large projects

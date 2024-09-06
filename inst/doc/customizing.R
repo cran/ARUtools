@@ -135,3 +135,47 @@ clean_metadata(project_files = f)
 ## -----------------------------------------------------------------------------
 clean_metadata(project_files = f, file_type = "mp4")
 
+## -----------------------------------------------------------------------------
+f <- c(
+  "//BARLTs/DeploymentProjectXYZsites_202223/XYZBrantAirstrip/20230519_RemoteTrip2223/00015998_20230519T210900-0400_SS23.wav",
+  "//BARLTs/DeploymentProjectXYZsites_202223/XYZPermafrostPFSC-SP1/20230415_RemoteTrip2223/00015321_20230415T214700-0400_Owls23.wav",
+  "//BARLTs/DeploymentProjectXYZsites_202223/XYZfoxden30/20230623_RemoteTrip2223/00015370_20230623T062000-0400_SR23.wav",
+  "//BARLTs/DeploymentProjectXYZsites_202223/XYZfoxden107/20220922_RemoteTrip2223/00016130_20220922T000200-0400_NFC22.wav",
+  "//BARLTs/DeploymentProjectXYZsites_00202223/XYZfoxden107/20230711_RemoteTrip2223/00016130_20230711T093600-0400_SR23.wav"
+)
+
+m <- clean_metadata(
+  project_files = f,
+  pattern_site_id = create_pattern_site_id(prefix = "XYZ\\w+", p_digits = 0:3, sep = c("", "-"), s_digits = 0:1),
+  pattern_aru_id = create_pattern_aru_id(arus = "", n_digits = 8), quiet = T
+)
+
+## -----------------------------------------------------------------------------
+m$site_id
+
+## -----------------------------------------------------------------------------
+m_site_id_fix <- clean_metadata(
+  project_files = f,
+  pattern_site_id = create_pattern_site_id(
+    prefix = "XYZ\\w+", p_digits = 0:3, sep = c("", "-"), s_digits = 0:1,
+    look_behind = "202223/"
+  ),
+  pattern_aru_id = create_pattern_aru_id(arus = "", n_digits = 8), quiet = T
+)
+
+m_site_id_fix$site_id
+
+## -----------------------------------------------------------------------------
+m_fix <- clean_metadata(
+  project_files = f,
+  pattern_site_id = create_pattern_site_id(
+    prefix = "XYZ\\w+", p_digits = 0:3, sep = c("", "-"), s_digits = 0:1,
+    look_behind = "202223/"
+  ),
+  pattern_aru_id = create_pattern_aru_id(arus = "", n_digits = 8, 
+                                         sep = "", 
+                                         look_behind = "RemoteTrip2223/", 
+                                         look_ahead = "_"),
+  quiet = T
+)
+
