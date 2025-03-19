@@ -119,21 +119,21 @@ withr::with_seed(2024, {
 })
 
 ## ----eval=F-------------------------------------------------------------------
-#  withr::with_seed(2024, {
-#    random_sample_stratified <-
-#      full_selection_probs |>
-#      left_join(sample_size, by = join_by(site_id)) |>
-#      nest_by(site_id, n) |>
-#      rowwise() |>
-#      mutate(sample = list(dplyr::slice_sample(
-#        .data = data,
-#        n = .data$n,
-#        weight_by = psel_normalized,
-#        replace = F
-#      ))) |>
-#      dplyr::select(site_id, sample) |>
-#      tidyr::unnest(sample)
-#  })
+# withr::with_seed(2024, {
+#   random_sample_stratified <-
+#     full_selection_probs |>
+#     left_join(sample_size, by = join_by(site_id)) |>
+#     nest_by(site_id, n) |>
+#     rowwise() |>
+#     mutate(sample = list(dplyr::slice_sample(
+#       .data = data,
+#       n = .data$n,
+#       weight_by = psel_normalized,
+#       replace = F
+#     ))) |>
+#     dplyr::select(site_id, sample) |>
+#     tidyr::unnest(sample)
+# })
 
 ## -----------------------------------------------------------------------------
 oversample <- filter(
@@ -213,14 +213,14 @@ count(random_sample_with_lengths, Length_group, site_id) |>
   )
 
 ## ----eval=F-------------------------------------------------------------------
-#  random_sample_with_lengths$length_clip <-
-#    purrr::map(
-#      1:nrow(random_sample_with_lengths),
-#      ~ get_wav_length(
-#        path = random_sample_with_lengths$path[[.x]],
-#        return_numeric = T
-#      )
-#    )
+# random_sample_with_lengths$length_clip <-
+#   purrr::map(
+#     1:nrow(random_sample_with_lengths),
+#     ~ get_wav_length(
+#       path = random_sample_with_lengths$path[[.x]],
+#       return_numeric = T
+#     )
+#   )
 
 ## -----------------------------------------------------------------------------
 random_sample_with_lengths$length <- 5 * 60
@@ -254,26 +254,26 @@ final_selection |>
   dplyr::select(path, wildtrax_file_name)
 
 ## ----eval=F-------------------------------------------------------------------
-#  out_directory <- "/path/to/upload/directory/"
-#  dir.create(out_directory, recursive = T)
-#  ul_tab <- expand_grid(
-#    period = c("Dawn"), # Add 'Dusk' if using more than one time period
-#    length = unique(selected_recordings$Length_group)
-#  )
-#  purrr::map(glue::glue("{out_directory}/{ul_tab$period}/{ul_tab$length}"),
-#    dir.create,
-#    recursive = T
-#  )
+# out_directory <- "/path/to/upload/directory/"
+# dir.create(out_directory, recursive = T)
+# ul_tab <- expand_grid(
+#   period = c("Dawn"), # Add 'Dusk' if using more than one time period
+#   length = unique(selected_recordings$Length_group)
+# )
+# purrr::map(glue::glue("{out_directory}/{ul_tab$period}/{ul_tab$length}"),
+#   dir.create,
+#   recursive = T
+# )
 
 ## ----eval=F-------------------------------------------------------------------
-#  log_output <-
-#    format_clip_wave(
-#      segment_df = final_selection,
-#      in_base_directory = "", out_base_directory = out_directory,
-#      length_clip_col = "length_clip",
-#      sub_dir_out_col = c("Time_period", "Length_group"),
-#      filepath_in_col = "path",
-#      out_filename_col = "wildtrax_file_name",
-#      use_job = F, filewarn = F
-#    )
+# log_output <-
+#   format_clip_wave(
+#     segment_df = final_selection,
+#     in_base_directory = "", out_base_directory = out_directory,
+#     length_clip_col = "length_clip",
+#     sub_dir_out_col = c("Time_period", "Length_group"),
+#     filepath_in_col = "path",
+#     out_filename_col = "wildtrax_file_name",
+#     use_job = F, filewarn = F
+#   )
 

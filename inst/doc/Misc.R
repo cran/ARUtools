@@ -8,23 +8,23 @@ knitr::opts_chunk$set(
 options(tibble.print_min = 4L, tibble.print_max = 4L)
 
 ## ----eval=F-------------------------------------------------------------------
-#  site_list <-
-#    example_sites |>
-#    tidyr::separate(Sites, into = c("plot", "site"), sep = "_", remove = F) |>
-#    dplyr::select(site_id = Sites, plot, site)
-#  
-#  
-#  tmp_dir <- tempdir(check = T) |> paste0("/ARUtools/")
-#  dir.create(tmp_dir)
-#  
-#  create_directory_structure(
-#    hexagons = site_list$plot,
-#    units = site_list$site_id,
-#    base_dir = tmp_dir
-#  )
+# site_list <-
+#   example_sites |>
+#   tidyr::separate(Sites, into = c("plot", "site"), sep = "_", remove = F) |>
+#   dplyr::select(site_id = Sites, plot, site)
+# 
+# 
+# tmp_dir <- tempdir(check = T) |> paste0("/ARUtools/")
+# dir.create(tmp_dir)
+# 
+# create_directory_structure(
+#   hexagons = site_list$plot,
+#   units = site_list$site_id,
+#   base_dir = tmp_dir
+# )
 
 ## ----eval=F-------------------------------------------------------------------
-#  list.dirs(tmp_dir, full.names = F)
+# list.dirs(tmp_dir, full.names = F)
 
 ## -----------------------------------------------------------------------------
 wind_files <-
@@ -45,17 +45,17 @@ wind_summary <- wind_detection_summarize_json(example_json)
 dplyr::glimpse(wind_summary)
 
 ## ----eval=F-------------------------------------------------------------------
-#  in_tasks <- fs::file_temp("Input_task_file", ext = ".csv")
-#  task_template <- wildRtrax::wt_make_aru_tasks(
-#    example_clean |>
-#      dplyr::mutate(
-#        recording_date_time = date_time,
-#        file_path = path, location = site_id,
-#        length_seconds = 300
-#      ),
-#    output = in_tasks,
-#    task_method = "1SPT", task_length = 300
-#  )
+# in_tasks <- fs::file_temp("Input_task_file", ext = ".csv")
+# task_template <- wildRtrax::wt_make_aru_tasks(
+#   example_clean |>
+#     dplyr::mutate(
+#       recording_date_time = date_time,
+#       file_path = path, location = site_id,
+#       length_seconds = 300
+#     ),
+#   output = in_tasks,
+#   task_method = "1SPT", task_length = 300
+# )
 
 ## -----------------------------------------------------------------------------
 template_observers
@@ -72,5 +72,5 @@ task_output <- wt_assign_tasks(
 task_output$task_summary
 
 ## ----eval=F-------------------------------------------------------------------
-#  shiny::runGitHub("dhope/Shiny_select")
+# shiny::runGitHub("dhope/Shiny_select")
 

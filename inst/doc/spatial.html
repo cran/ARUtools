@@ -349,113 +349,113 @@ first.</p>
 <p>We’ll start with our metadata data frame.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">clean_metadata</span>(<span class="at">project_files =</span> example_files)</span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co">#&gt; Extracting ARU info...</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt; Extracting Dates and Times...</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>m</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">#&gt; # A tibble: 42 × 11</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt; # ℹ 38 more rows</span></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#&gt; # ℹ 2 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;</span></span></code></pre></div>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt; Extracting Dates and Times...</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>m</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; # A tibble: 42 × 11</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt; # ℹ 38 more rows</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co">#&gt; # ℹ 2 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;</span></span></code></pre></div>
 <p>This isn’t spatial because we don’t actually know where the sites are
 located. But our next step is to get our site coordinates.</p>
 <p>Let’s assume we have a spatial data frame containing our sites and
 where they are located.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(example_sites, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>), <span class="at">crs =</span> <span class="dv">4326</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>s</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; Simple feature collection with 10 features and 6 fields</span></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; Geometry type: POINT</span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt; Dimension:     XY</span></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; Bounding box:  xmin: -91.38 ymin: 45 xmax: -84.45 ymax: 52.68</span></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt;    Sites Date_set_out Date_removed        ARU Plots Subplot</span></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; 1  P01_1   2020-05-01   2020-05-03 BARLT10962 Plot1       a</span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; 2  P02_1   2020-05-03   2020-05-05   S4A01234 Plot1       a</span></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt; 3  P03_1   2020-05-05   2020-05-06 BARLT10962 Plot2       a</span></span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt; 4  P04_1   2020-05-05   2020-05-07 BARLT11111 Plot2       a</span></span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt; 5  P05_1   2020-05-06   2020-05-07 BARLT10962 Plot3       b</span></span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt; 6  P06_1   2020-05-08   2020-05-09 BARLT10962 Plot1       a</span></span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt; 7  P07_1   2020-05-08   2020-05-10   S4A01234 Plot1       a</span></span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co">#&gt; 8  P08_1   2020-05-10   2020-05-11 BARLT10962 Plot2       a</span></span>
-<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co">#&gt; 9  P09_1   2020-05-10   2020-05-11   S4A02222 Plot2       a</span></span>
-<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="co">#&gt; 10 P10_1   2020-05-10   2020-05-11   S4A03333 Plot3       b</span></span>
-<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co">#&gt;                 geometry</span></span>
-<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="co">#&gt; 1   POINT (-85.03 50.01)</span></span>
-<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="co">#&gt; 2   POINT (-87.45 52.68)</span></span>
-<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a><span class="co">#&gt; 3   POINT (-90.38 48.99)</span></span>
-<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a><span class="co">#&gt; 4      POINT (-85.53 45)</span></span>
-<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="co">#&gt; 5   POINT (-88.45 51.05)</span></span>
-<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="co">#&gt; 6      POINT (-90.08 52)</span></span>
-<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a><span class="co">#&gt; 7   POINT (-86.03 50.45)</span></span>
-<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="co">#&gt; 8  POINT (-84.45 48.999)</span></span>
-<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="co">#&gt; 9      POINT (-91.38 45)</span></span>
-<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a><span class="co">#&gt; 10     POINT (-90 50.01)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(example_sites, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>), <span class="at">crs =</span> <span class="dv">4326</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>s</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt; Simple feature collection with 10 features and 6 fields</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt; Geometry type: POINT</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; Dimension:     XY</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; Bounding box:  xmin: -91.38 ymin: 45 xmax: -84.45 ymax: 52.68</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt;    Sites Date_set_out Date_removed        ARU Plots Subplot</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt; 1  P01_1   2020-05-01   2020-05-03 BARLT10962 Plot1       a</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#&gt; 2  P02_1   2020-05-03   2020-05-05   S4A01234 Plot1       a</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">#&gt; 3  P03_1   2020-05-05   2020-05-06 BARLT10962 Plot2       a</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">#&gt; 4  P04_1   2020-05-05   2020-05-07 BARLT11111 Plot2       a</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="co">#&gt; 5  P05_1   2020-05-06   2020-05-07 BARLT10962 Plot3       b</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="co">#&gt; 6  P06_1   2020-05-08   2020-05-09 BARLT10962 Plot1       a</span></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="co">#&gt; 7  P07_1   2020-05-08   2020-05-10   S4A01234 Plot1       a</span></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="co">#&gt; 8  P08_1   2020-05-10   2020-05-11 BARLT10962 Plot2       a</span></span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="co">#&gt; 9  P09_1   2020-05-10   2020-05-11   S4A02222 Plot2       a</span></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a><span class="co">#&gt; 10 P10_1   2020-05-10   2020-05-11   S4A03333 Plot3       b</span></span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a><span class="co">#&gt;                 geometry</span></span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a><span class="co">#&gt; 1   POINT (-85.03 50.01)</span></span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a><span class="co">#&gt; 2   POINT (-87.45 52.68)</span></span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a><span class="co">#&gt; 3   POINT (-90.38 48.99)</span></span>
+<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a><span class="co">#&gt; 4      POINT (-85.53 45)</span></span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="co">#&gt; 5   POINT (-88.45 51.05)</span></span>
+<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a><span class="co">#&gt; 6      POINT (-90.08 52)</span></span>
+<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a><span class="co">#&gt; 7   POINT (-86.03 50.45)</span></span>
+<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a><span class="co">#&gt; 8  POINT (-84.45 48.999)</span></span>
+<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a><span class="co">#&gt; 9      POINT (-91.38 45)</span></span>
+<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a><span class="co">#&gt; 10     POINT (-90 50.01)</span></span></code></pre></div>
 <p>Similar to a non-spatial workflow, we’ll clean up this list so we can
 add these sites to our metadata.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>sites <span class="ot">&lt;-</span> <span class="fu">clean_site_index</span>(s,</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  <span class="at">name_aru_id =</span> <span class="st">&quot;ARU&quot;</span>,</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  <span class="at">name_site_id =</span> <span class="st">&quot;Sites&quot;</span>,</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  <span class="at">name_date_time =</span> <span class="fu">c</span>(<span class="st">&quot;Date_set_out&quot;</span>, <span class="st">&quot;Date_removed&quot;</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>)</span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt; There are overlapping date ranges</span></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt; • Shifting start/end times to &#39;noon&#39;</span></span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#&gt; • Skip this with `resolve_overlaps = FALSE`</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>sites</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#&gt; Simple feature collection with 10 features and 6 fields</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt; Geometry type: POINT</span></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt; Dimension:     XY</span></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt; Bounding box:  xmin: -91.38 ymin: 45 xmax: -84.45 ymax: 52.68</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt; # A tibble: 10 × 7</span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt;   site_id aru_id   date_time_start     date_time_end       date_start date_end  </span></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt; * &lt;chr&gt;   &lt;chr&gt;    &lt;dttm&gt;              &lt;dttm&gt;              &lt;date&gt;     &lt;date&gt;    </span></span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt; 1 P01_1   BARLT10… 2020-05-01 12:00:00 2020-05-03 12:00:00 2020-05-01 2020-05-03</span></span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt; 2 P02_1   S4A01234 2020-05-03 12:00:00 2020-05-05 12:00:00 2020-05-03 2020-05-05</span></span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#&gt; 3 P03_1   BARLT10… 2020-05-05 12:00:00 2020-05-06 12:00:00 2020-05-05 2020-05-06</span></span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt; 4 P04_1   BARLT11… 2020-05-05 12:00:00 2020-05-07 12:00:00 2020-05-05 2020-05-07</span></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt; # ℹ 6 more rows</span></span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co">#&gt; # ℹ 1 more variable: geometry &lt;POINT [°]&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>sites <span class="ot">&lt;-</span> <span class="fu">clean_site_index</span>(s,</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>  <span class="at">name_aru_id =</span> <span class="st">&quot;ARU&quot;</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  <span class="at">name_site_id =</span> <span class="st">&quot;Sites&quot;</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  <span class="at">name_date_time =</span> <span class="fu">c</span>(<span class="st">&quot;Date_set_out&quot;</span>, <span class="st">&quot;Date_removed&quot;</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>)</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; There are overlapping date ranges</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; • Shifting start/end times to &#39;noon&#39;</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; • Skip this with `resolve_overlaps = FALSE`</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>sites</span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; Simple feature collection with 10 features and 6 fields</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt; Geometry type: POINT</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt; Dimension:     XY</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt; Bounding box:  xmin: -91.38 ymin: 45 xmax: -84.45 ymax: 52.68</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt; # A tibble: 10 × 7</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co">#&gt;   site_id aru_id   date_time_start     date_time_end       date_start date_end  </span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co">#&gt; * &lt;chr&gt;   &lt;chr&gt;    &lt;dttm&gt;              &lt;dttm&gt;              &lt;date&gt;     &lt;date&gt;    </span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="co">#&gt; 1 P01_1   BARLT10… 2020-05-01 12:00:00 2020-05-03 12:00:00 2020-05-01 2020-05-03</span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co">#&gt; 2 P02_1   S4A01234 2020-05-03 12:00:00 2020-05-05 12:00:00 2020-05-03 2020-05-05</span></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="co">#&gt; 3 P03_1   BARLT10… 2020-05-05 12:00:00 2020-05-06 12:00:00 2020-05-05 2020-05-06</span></span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="co">#&gt; 4 P04_1   BARLT11… 2020-05-05 12:00:00 2020-05-07 12:00:00 2020-05-05 2020-05-07</span></span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a><span class="co">#&gt; # ℹ 6 more rows</span></span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a><span class="co">#&gt; # ℹ 1 more variable: geometry &lt;POINT [°]&gt;</span></span></code></pre></div>
 <p>Note that we still have a spatial data set.</p>
 <p>Now let’s add this site-related information to our metadata.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">add_sites</span>(m, sites)</span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="co">#&gt; Joining by columns `date_time_start` and `date_time_end`</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>m</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="co">#&gt; Simple feature collection with 42 features and 11 fields</span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co">#&gt; Geometry type: POINT</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co">#&gt; Dimension:     XY</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#&gt; Bounding box:  xmin: -91.38 ymin: 45 xmax: -84.45 ymax: 52.68</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#&gt; # A tibble: 42 × 12</span></span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co">#&gt; * &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
-<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
-<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
-<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="co">#&gt; # ℹ 38 more rows</span></span>
-<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="co">#&gt; # ℹ 3 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;, geometry &lt;POINT [°]&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">add_sites</span>(m, sites)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#&gt; Joining by columns `date_time_start` and `date_time_end`</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>m</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; Simple feature collection with 42 features and 11 fields</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt; Geometry type: POINT</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt; Dimension:     XY</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt; Bounding box:  xmin: -91.38 ymin: 45 xmax: -84.45 ymax: 52.68</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#&gt; # A tibble: 42 × 12</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="co">#&gt; * &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="co">#&gt; # ℹ 38 more rows</span></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co">#&gt; # ℹ 3 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;, geometry &lt;POINT [°]&gt;</span></span></code></pre></div>
 <p>Again our output is as a spatial data set.</p>
 <p>Let’s continue by adding times to sunrise/sunset.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">calc_sun</span>(m)</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>m</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co">#&gt; Simple feature collection with 42 features and 14 fields</span></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co">#&gt; Geometry type: POINT</span></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co">#&gt; Dimension:     XY</span></span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co">#&gt; Bounding box:  xmin: -91.38 ymin: 45 xmax: -84.45 ymax: 52.68</span></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co">#&gt; # A tibble: 42 × 15</span></span>
-<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
-<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
-<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
-<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
-<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
-<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
-<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a><span class="co">#&gt; # ℹ 38 more rows</span></span>
-<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a><span class="co">#&gt; # ℹ 6 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;, tz &lt;chr&gt;, t2sr &lt;dbl&gt;,</span></span>
-<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a><span class="co">#&gt; #   t2ss &lt;dbl&gt;, geometry &lt;POINT [°]&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">calc_sun</span>(m)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>m</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt; Simple feature collection with 42 features and 14 fields</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt; Geometry type: POINT</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt; Dimension:     XY</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt; Bounding box:  xmin: -91.38 ymin: 45 xmax: -84.45 ymax: 52.68</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt; # A tibble: 42 × 15</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co">#&gt; # ℹ 38 more rows</span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co">#&gt; # ℹ 6 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;, tz &lt;chr&gt;, t2sr &lt;dbl&gt;,</span></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co">#&gt; #   t2ss &lt;dbl&gt;, geometry &lt;POINT [°]&gt;</span></span></code></pre></div>
 <p>All done! And we’ve retained a spatial data set the entire way.</p>
 <div id="problems" class="section level2">
 <h2>Problems</h2>
@@ -464,64 +464,64 @@ add these sites to our metadata.</p>
 meaning that when using the <code>add_sites()</code> function, you’ll
 get a warning and a data frame back if you try to add an incomplete list
 of sites.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">clean_metadata</span>(<span class="at">project_files =</span> example_files)</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="co">#&gt; Extracting ARU info...</span></span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co">#&gt; Extracting Dates and Times...</span></span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a></span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>sites <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(example_sites, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>), <span class="at">crs =</span> <span class="dv">4326</span>) <span class="sc">|&gt;</span></span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>  <span class="fu">clean_site_index</span>(</span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>    <span class="at">name_aru_id =</span> <span class="st">&quot;ARU&quot;</span>,</span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>    <span class="at">name_site_id =</span> <span class="st">&quot;Sites&quot;</span>,</span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>    <span class="at">name_date_time =</span> <span class="fu">c</span>(<span class="st">&quot;Date_set_out&quot;</span>, <span class="st">&quot;Date_removed&quot;</span>)</span>
-<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>  )</span>
-<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co">#&gt; There are overlapping date ranges</span></span>
-<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="co">#&gt; • Shifting start/end times to &#39;noon&#39;</span></span>
-<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="co">#&gt; • Skip this with `resolve_overlaps = FALSE`</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a></span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>sites <span class="ot">&lt;-</span> sites[<span class="sc">-</span><span class="dv">1</span>, ] <span class="co"># Omit that first site</span></span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">add_sites</span>(m, sites)</span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co">#&gt; Joining by columns `date_time_start` and `date_time_end`</span></span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="co">#&gt; Identified possible problems with metadata extraction:</span></span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co">#&gt; ✖ Not all files were matched to a site reference (6/42)</span></span>
-<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="co">#&gt; • Consider adjusting the `by` argument</span></span>
-<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="co">#&gt; Warning in add_sites(m, sites): Cannot have missing coordinates in spatial data frames</span></span>
-<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="co">#&gt; • Returning non-spatial data frame</span></span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>m</span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="co">#&gt; # A tibble: 42 × 13</span></span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
-<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="co">#&gt; # ℹ 38 more rows</span></span>
-<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="co">#&gt; # ℹ 4 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;, longitude &lt;dbl&gt;,</span></span>
-<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a><span class="co">#&gt; #   latitude &lt;dbl&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">clean_metadata</span>(<span class="at">project_files =</span> example_files)</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="co">#&gt; Extracting ARU info...</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co">#&gt; Extracting Dates and Times...</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>sites <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(example_sites, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>), <span class="at">crs =</span> <span class="dv">4326</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>  <span class="fu">clean_site_index</span>(</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>    <span class="at">name_aru_id =</span> <span class="st">&quot;ARU&quot;</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>    <span class="at">name_site_id =</span> <span class="st">&quot;Sites&quot;</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>    <span class="at">name_date_time =</span> <span class="fu">c</span>(<span class="st">&quot;Date_set_out&quot;</span>, <span class="st">&quot;Date_removed&quot;</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>  )</span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co">#&gt; There are overlapping date ranges</span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co">#&gt; • Shifting start/end times to &#39;noon&#39;</span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="co">#&gt; • Skip this with `resolve_overlaps = FALSE`</span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>sites <span class="ot">&lt;-</span> sites[<span class="sc">-</span><span class="dv">1</span>, ] <span class="co"># Omit that first site</span></span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">add_sites</span>(m, sites)</span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="co">#&gt; Joining by columns `date_time_start` and `date_time_end`</span></span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a><span class="co">#&gt; Identified possible problems with metadata extraction:</span></span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="co">#&gt; ✖ Not all files were matched to a site reference (6/42)</span></span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a><span class="co">#&gt; • Consider adjusting the `by` argument</span></span>
+<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a><span class="co">#&gt; Warning in add_sites(m, sites): Cannot have missing coordinates in spatial data frames</span></span>
+<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a><span class="co">#&gt; • Returning non-spatial data frame</span></span>
+<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a>m</span>
+<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a><span class="co">#&gt; # A tibble: 42 × 13</span></span>
+<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
+<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
+<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a><span class="co">#&gt; 1 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a><span class="co">#&gt; 2 P01_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P01_1   -0400    </span></span>
+<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a><span class="co">#&gt; 3 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
+<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a><span class="co">#&gt; 4 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
+<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a><span class="co">#&gt; # ℹ 38 more rows</span></span>
+<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a><span class="co">#&gt; # ℹ 4 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;, longitude &lt;dbl&gt;,</span></span>
+<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a><span class="co">#&gt; #   latitude &lt;dbl&gt;</span></span></code></pre></div>
 <p>To resolve this, either add in the missing site information, or omit
 the files before joining.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">clean_metadata</span>(<span class="at">project_files =</span> example_files) <span class="sc">|&gt;</span></span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">&gt;</span> <span class="st">&quot;2020-05-03&quot;</span>) <span class="co"># Filter out recordings that don&#39;t match a site</span></span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="co">#&gt; Extracting ARU info...</span></span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="co">#&gt; Extracting Dates and Times...</span></span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a></span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">add_sites</span>(m, sites)</span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="co">#&gt; Joining by columns `date_time_start` and `date_time_end`</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>m</span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="co">#&gt; Simple feature collection with 36 features and 11 fields</span></span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="co">#&gt; Geometry type: POINT</span></span>
-<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="co">#&gt; Dimension:     XY</span></span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="co">#&gt; Bounding box:  xmin: -91.38 ymin: 45 xmax: -84.45 ymax: 52.68</span></span>
-<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
-<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a><span class="co">#&gt; # A tibble: 36 × 12</span></span>
-<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
-<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a><span class="co">#&gt; * &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
-<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a><span class="co">#&gt; 1 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
-<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a><span class="co">#&gt; 2 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
-<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a><span class="co">#&gt; 3 P03_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P03_1   -0400    </span></span>
-<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a><span class="co">#&gt; 4 P04_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P04_1   -0400    </span></span>
-<span id="cb16-14"><a href="#cb16-14" tabindex="-1"></a><span class="co">#&gt; # ℹ 32 more rows</span></span>
-<span id="cb16-15"><a href="#cb16-15" tabindex="-1"></a><span class="co">#&gt; # ℹ 3 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;, geometry &lt;POINT [°]&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">clean_metadata</span>(<span class="at">project_files =</span> example_files) <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">&gt;</span> <span class="st">&quot;2020-05-03&quot;</span>) <span class="co"># Filter out recordings that don&#39;t match a site</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co">#&gt; Extracting ARU info...</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co">#&gt; Extracting Dates and Times...</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">add_sites</span>(m, sites)</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#&gt; Joining by columns `date_time_start` and `date_time_end`</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>m</span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co">#&gt; Simple feature collection with 36 features and 11 fields</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co">#&gt; Geometry type: POINT</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="co">#&gt; Dimension:     XY</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="co">#&gt; Bounding box:  xmin: -91.38 ymin: 45 xmax: -84.45 ymax: 52.68</span></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="co">#&gt; # A tibble: 36 × 12</span></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="co">#&gt;   file_name     type  path  aru_id manufacturer model aru_type site_id tz_offset</span></span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="co">#&gt; * &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    </span></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="co">#&gt; 1 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="co">#&gt; 2 P02_1_202005… wav   a_S4… S4A01… Wildlife Ac… Song… SongMet… P02_1   &lt;NA&gt;     </span></span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a><span class="co">#&gt; 3 P03_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P03_1   -0400    </span></span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="co">#&gt; 4 P04_1_202005… wav   a_BA… BARLT… Frontier La… BAR-… BARLT    P04_1   -0400    </span></span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="co">#&gt; # ℹ 32 more rows</span></span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="co">#&gt; # ℹ 3 more variables: date_time &lt;dttm&gt;, date &lt;date&gt;, geometry &lt;POINT [°]&gt;</span></span></code></pre></div>
 <p>Fixed!</p>
 </div>
 

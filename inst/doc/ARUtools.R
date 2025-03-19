@@ -18,14 +18,16 @@ m <- clean_metadata(project_files = example_files)
 m
 
 ## ----eval=FALSE---------------------------------------------------------------
-#  base_directory <- "/path/to/project/files/"
-#  m <- clean_metadata(project_dir = base_directory)
+# base_directory <- "/path/to/project/files/"
+# m <- clean_metadata(project_dir = base_directory)
 
 ## -----------------------------------------------------------------------------
 example_sites
 
 ## ----error = TRUE-------------------------------------------------------------
+try({
 sites <- clean_site_index(example_sites)
+})
 
 ## -----------------------------------------------------------------------------
 sites <- clean_site_index(example_sites,
